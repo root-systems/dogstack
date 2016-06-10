@@ -1,6 +1,6 @@
 {
   "name": "dogstack",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "big happy loveable stack, but it's a bit dumb and drools everywhere",
   "main": "index.js",
   "scripts": {
@@ -10,15 +10,17 @@
   "author": "iainkirkpatrick",
   "license": "ISC",
   "browserify": {
-    "transform": [[
-      "babelify",
-      {
-        "presets": [
-          "es2015",
-          "react"
-        ]
-      }
-    ]]
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "react"
+          ]
+        }
+      ]
+    ]
   },
   "dependencies": {
     "react": "^15.1.0",
