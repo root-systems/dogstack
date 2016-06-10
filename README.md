@@ -57,6 +57,8 @@ in the future, further options:
 
 ## API
 
+`npm install dogstack --save`
+
 require the stack
 `var stack = require('dogstack')`
 

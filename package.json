@@ -1,7 +1,7 @@
 {
   "name": "dogstack",
   "version": "0.0.1",
-  "description": "big happy loveable stack, but it's a bit dumb and drools everywhere",
+  "description": "popular libraries playing with each other in the backyard",
   "main": "index.js",
   "scripts": {
     "build-example-counter": "browserify examples/counterApp/main.js -o examples/counterApp/bundle.js",
