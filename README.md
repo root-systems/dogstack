@@ -1,8 +1,10 @@
 # dogstack
-## a big, happy, loveable client-side stack
-## (but it's also a bit dumb and tends to slobber everywhere)
 
-### see also [catstack](https://github.com/enspiral-root-systems/cat-stack), dogstack's smarter, slimmer, more cunning partner in crime
+**a big, happy, loveable client-side stack**
+
+_(but it's also a bit dumb and tends to slobber everywhere)_
+
+###### see also [catstack](https://github.com/enspiral-root-systems/cat-stack), dogstack's smarter, slimmer, more cunning partner in crime
 
 ## PRIOR ART
 
