@@ -79,3 +79,10 @@ OR
 * no passing of store to routes at the moment, but will want to in future, this enables clever things
 
 - no styling lib as of yet... will probably go with Stilr (esp if the PR for removing react dep comes through)
+
+
+- feeling that the stack should def scaffold out the root reducer and route (though it kind of doesn't matter for route)
+- otherwise you have to know that the stack is using react-router-redux under the hood when creating your root reducer
+
+- for the root reducer, could just ask the user to pass in a object of reducers, and the stack just adds on the routing slice
+- root route is less clear, in fact i think it can't easily get more modular than it is. just the restriction of using react-router
