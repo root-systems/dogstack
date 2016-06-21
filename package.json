@@ -2,9 +2,9 @@
   "name": "dogstack",
   "version": "0.0.3",
   "description": "popular libraries playing with each other in the backyard",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "prepublish": "browserify index.js -o lib/index.js",
+    "prepublish": "browserify ./src/index.js -o ./dist/index.js",
     "build-example-counter": "browserify examples/counterApp/main.js -o examples/counterApp/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
