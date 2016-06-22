@@ -43,6 +43,8 @@ run the counter example by:
 
 ## REQUIREMENTS
 
+**MUST be used in an app that is browserified!**
+
 needs user to provide:
 - routes (as top-level route)
 - reducers (as top-level reducer)
