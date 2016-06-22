@@ -1,6 +1,6 @@
 {
   "name": "dogstack",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "popular libraries playing with each other in the backyard",
   "main": "index.js",
   "scripts": {
