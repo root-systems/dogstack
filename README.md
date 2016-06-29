@@ -69,6 +69,8 @@ it's just a simple function that takes a mount element, a root reducer, and a ro
 
 ## IDEAS?
 
+- CONSIDER STRONGLY implementing [redux-loop](https://github.com/raisemarketplace/redux-loop) as part of dogstack, as per the catstack / inu paradigm
+
 * curried function off the main export? i.e.
 `var stackWithReducers = stack(reducer)``
 OR
