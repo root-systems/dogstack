@@ -34,7 +34,7 @@
 
 ## prior art
 
-- architecture by @ahdinosaur on previous private projects
+- architecture by [@ahdinosaur](https://github.com/ahdinosaur) on previous private projects
 - https://github.com/jlongster/react-redux-universal-hot-example0
 - https://github.com/react-boilerplate/react-boilerplate
 - general discussions with teammates
