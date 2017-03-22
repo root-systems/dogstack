@@ -1,16 +1,20 @@
-# dogstack
+<h1 align="center">
+  <img
+    alt="dogstack on a post-it note"
+    src="http://i.imgur.com/vjfouxn.jpg"
+    height="200"
+  />
+  <br />
+  dogstack
+</h1>
 
-**a big, happy, loveable client-side stack**
+<h4 align="center">
+  :dog: :dog: :dog: A popular-choice grab-bag framework for teams working on production web apps.
+</h4>
 
-_(but it's also a bit dumb and tends to slobber everywhere)_
-
-###### see also [catstack](https://github.com/enspiral-root-systems/cat-stack), dogstack's smarter, slimmer, more cunning partner in crime
-
-## PRIOR ART
-
-- architecture by @ahdinosaur on previous private projects
-- https://github.com/jlongster/react-redux-universal-hot-example
-- general discussions with teammates
+<h6 align="center">
+  :cat: see also [catstack](https://github.com/enspiral-root-systems/cat-stack), dogstack's smarter, slimmer, more cunning partner in crime
+</h4>
 
 ## PURPOSE
 
@@ -66,6 +70,13 @@ require the stack
 
 it's just a simple function that takes a mount element, a root reducer, and a root route
 `stack(mount, reducer, route)`
+
+## PRIOR ART
+
+- architecture by @ahdinosaur on previous private projects
+- https://github.com/jlongster/react-redux-universal-hot-example0
+- https://github.com/react-boilerplate/react-boilerplate
+- general discussions with teammates
 
 ## IDEAS?
 
