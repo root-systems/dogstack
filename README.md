@@ -2,18 +2,18 @@
   <img
     alt="dogstack on a post-it note"
     src="http://i.imgur.com/vjfouxn.jpg"
-    height="200"
+    height="250"
   />
   <br />
   dogstack
 </h1>
 
 <h4 align="center">
-  :dog: :dog: :dog: A popular-choice grab-bag framework for teams working on production web apps.
+  :dog: :dog: :dog: a popular-choice grab-bag framework for teams working on production web apps
 </h4>
 
 <h6 align="center">
-  :cat: see also [catstack](https://github.com/enspiral-root-systems/cat-stack), dogstack's smarter, slimmer, more cunning partner in crime
+  :cat: see also <a href='https://github.com/enspiral-root-systems/cat-stack'>catstack</a>, dogstack's smarter, slimmer, more cunning partner in crime
 </h4>
 
 ## PURPOSE
