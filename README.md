@@ -23,7 +23,7 @@
 
 ## demos
 
-- [catstack.herokuapp.com](https://catstack.herokuapp.com/): this repo's [./example](example) deployed to heroku
+- [dogstack.herokuapp.com](https://dogstack.herokuapp.com/): this repo's [./example](example) deployed to heroku
 
 ## modules
 
