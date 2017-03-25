@@ -1,10 +1,12 @@
 {
   "name": "dogstack",
   "version": "0.0.5",
-  "description": "popular libraries playing with each other in the backyard",
+  "description": "a popular-choice grab-bag framework for teams working on production web apps",
   "main": "index.js",
   "scripts": {
-    "build-example-counter": "browserify examples/counterApp/main.js -o examples/counterApp/bundle.js"
+    "start": "node examples/todos/",
+    "build-example-todos": "browserify examples/todos/ -o examples/todos/public/bundle.js",
+    "dev": "npm run build-example-todos && npm run start"
   },
   "author": "iainkirkpatrick",
   "license": "ISC",
@@ -25,17 +27,24 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
+    "body-parser": "^1.17.1",
+    "feathers": "^2.1.1",
+    "feathers-errors": "^2.6.2",
+    "feathers-knex": "^2.6.3",
+    "feathers-rest": "^1.7.1",
+    "knex": "^0.12.9",
+    "lodash": "^4.17.4",
+    "morgan": "^1.8.1",
+    "pg": "^6.1.5",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.4",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "sqlite3": "^3.1.8"
   },
   "devDependencies": {
-    "browserify": "^13.0.1",
-    "redux-devtools": "^3.3.1",
-    "redux-devtools-dock-monitor": "^1.1.1",
-    "redux-devtools-log-monitor": "^1.0.11"
+    "browserify": "^13.0.1"
   }
 }
