@@ -5,13 +5,13 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './db/dev.sqlite3'
+      filename: './dev.sqlite3'
     },
     migrations: {
-      directory: './db/migrations'
+      directory: './migrations'
     },
     seeds: {
-      directory: './db/seeds'
+      directory: './seeds'
     }
   },
 
@@ -21,10 +21,10 @@ module.exports = {
       filename: ':memory:'
     },
     migrations: {
-      directory: './db/migrations'
+      directory: './migrations'
     },
     seeds: {
-      directory: './db/seeds'
+      directory: './seeds'
     },
     useNullAsDefault: true
   },
@@ -53,11 +53,11 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './db/migrations',
+      directory: './migrations',
       tableName: 'knex_migrations'
     },
     seeds: {
-      directory: './db/seeds'
+      directory: './seeds'
     }
   }
 

@@ -4,7 +4,7 @@ const rest = require('feathers-rest')
 const _ = require('lodash')
 
 const services = {
-  questions: require('./questions/service.js')
+  todos: require('./todos/service.js')
 }
 
 module.exports = function (db) {
