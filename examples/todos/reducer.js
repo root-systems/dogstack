@@ -1,9 +1,8 @@
-const { combineReducers } = require('redux')
-import { reducer as formReducer } from 'redux-form'
+import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
 
-module.exports = combineReducers({
-  assessment: require('./assessment/reducer.js'),
-  answers: require('./answers/reducer.js'),
-  questions: require('./questions/reducer.js'),
-  form: formReducer
+// import LayoutReducer from '../layout/reducer'
+
+export default combineReducers({
+  routing: routerReducer
 })

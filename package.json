@@ -55,6 +55,7 @@
     "inject-lr-script": "^2.1.0",
     "node-dev": "^3.1.3",
     "pump": "^1.0.2",
+    "redux-logger": "^3.0.0",
     "tiny-lr": "^1.0.3",
     "watchify-middleware": "^1.6.0"
   }

@@ -1,40 +1,21 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const { Provider } = require('react-redux')
-const { createStore, applyMiddleware, compose } = require('redux')
-const createHistory = require('history').createHashHistory
-const { Router, hashHistory } = require('react-router')
-const ReduxThunk = require('redux-thunk').default
-const reducer = require('./reducer')
-const Routes = require('./routes')
+const { browserHistory } = require('react-router')
+import { syncHistoryWithStore } from 'react-router-redux'
 
-const store = createStore(
-	reducer,
-	{},
-	compose(
-		applyMiddleware(ReduxThunk),
-		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-	)
-)
+import store from './store'
+import Router from './router'
 
-store.subscribe(() => {})
-
-const Root = ({store}) => {
-	return (
-		<Provider store={store}>
-			<Router history={hashHistory}>
-        {Routes({store})}
-			</Router>
-		</Provider>
-)
-}
+// store.subscribe(() => {})
 
 document.addEventListener('DOMContentLoaded', () => {
-	console.log('DOMContentLoaded')
-	const root = document.querySelector('#app')
+  const history = syncHistoryWithStore(browserHistory, store)
 
-	ReactDOM.render(
-		<Root store={store}/>,
-		root
-	)
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router history={history} store={store} />
+    </Provider>,
+    document.querySelector('#app')
+  )
 })
