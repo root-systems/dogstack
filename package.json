@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node examples/todos/",
-    "build-example-todos": "browserify examples/todos/ -o examples/todos/public/bundle.js",
-    "dev": "npm run build-example-todos && npm run start"
+    "dev": "DEBUG=todos node-dev examples/todos"
   },
   "author": "iainkirkpatrick",
   "license": "ISC",
@@ -28,6 +27,7 @@
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
     "body-parser": "^1.17.1",
+    "browserify": "^13.3.0",
     "feathers": "^2.1.1",
     "feathers-errors": "^2.6.2",
     "feathers-knex": "^2.6.3",
@@ -42,9 +42,20 @@
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
+    "redux-actions": "^2.0.1",
+    "redux-form": "^6.6.0",
+    "redux-thunk": "^2.2.0",
     "sqlite3": "^3.1.8"
   },
   "devDependencies": {
-    "browserify": "^13.0.1"
+    "accepts": "^1.3.3",
+    "bl": "^1.2.0",
+    "browserify": "^13.0.1",
+    "create-html": "^1.1.0",
+    "inject-lr-script": "^2.1.0",
+    "node-dev": "^3.1.3",
+    "pump": "^1.0.2",
+    "tiny-lr": "^1.0.3",
+    "watchify-middleware": "^1.6.0"
   }
 }
