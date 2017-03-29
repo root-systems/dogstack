@@ -1,13 +1,18 @@
 const React = require('react')
 
-export default function Dogs (props) {
-  console.log(props)
-  return <div>
-    <span>DOGS</span>
-    {
-      props.dogs.map((dog) => {
-        return <span>{dog}</span>
-      })
-    }
-  </div>
+export default class Dogs extends React.Component {
+  componentDidMount () {
+    this.props.findDog()
+  }
+
+  render () {
+    return <div>
+      <span>DOGS</span>
+      {
+        this.props.dogs.map((dog) => {
+          return <span>{dog}</span>
+        })
+      }
+    </div>
+  }
 }
