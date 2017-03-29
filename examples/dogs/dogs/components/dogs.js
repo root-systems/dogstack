@@ -5,7 +5,7 @@ export default function Dogs (props) {
   return <div>
     <span>DOGS</span>
     {
-      props.dogs.dogs.map((dog) => {
+      props.dogs.map((dog) => {
         return <span>{dog}</span>
       })
     }
