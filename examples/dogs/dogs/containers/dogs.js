@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import Todos from '../components/todos'
+import Dogs from '../components/dogs'
 
 export default connect(
   (state) => state
-)(Todos)
+)(Dogs)

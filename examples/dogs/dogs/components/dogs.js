@@ -1,7 +1,13 @@
 const React = require('react')
 
-export default function Todos (props) {
+export default function Dogs (props) {
+  console.log(props)
   return <div>
-    <span>TODOS</span>
+    <span>DOGS</span>
+    {
+      props.dogs.dogs.map((dog) => {
+        return <span>{dog}</span>
+      })
+    }
   </div>
 }

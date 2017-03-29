@@ -4,8 +4,8 @@
   "description": "a popular-choice grab-bag framework for teams working on production web apps",
   "main": "index.js",
   "scripts": {
-    "start": "node examples/todos/",
-    "dev": "DEBUG=todos node-dev examples/todos"
+    "start": "node examples/dogs/",
+    "dev": "DEBUG=dogs node-dev examples/dogs"
   },
   "author": "iainkirkpatrick",
   "license": "ISC",

@@ -3,12 +3,12 @@ const React = require('react')
 
 // Top Level Containers
 import Layout from './layout/components/layout'
-import TodosContainer from './todos/containers/todos'
+import DogsContainer from './dogs/containers/dogs'
 
 export default function ({ history, store }) {
   return <Router history={history}>
     <Route path='/' component={Layout}>
-      <IndexRoute component={TodosContainer} />
+      <IndexRoute component={DogsContainer} />
     </Route>
   </Router>
 }
