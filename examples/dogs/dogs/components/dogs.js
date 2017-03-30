@@ -1,4 +1,6 @@
-const React = require('react')
+import React from 'react'
+
+import Dog from './dog'
 
 export default class Dogs extends React.Component {
   componentDidMount () {
@@ -10,7 +12,7 @@ export default class Dogs extends React.Component {
       <span>DOGS</span>
       {
         this.props.dogs.map((dog) => {
-          return <span>{dog}</span>
+          return <Dog name={dog.name} />
         })
       }
     </div>
