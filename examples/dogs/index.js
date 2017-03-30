@@ -1,6 +1,6 @@
 const db = require('./db') // knex instance
 const app = require('./server')(db) // app
-const debug = require('debug')('todos')
+const debug = require('debug')('dogs')
 const http = require('http')
 
 /**
