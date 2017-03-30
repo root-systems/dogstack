@@ -29,10 +29,10 @@ module.exports = function (db) {
   const bundleEntry = 'browser.js'
   const bundler = Bundler(bundleEntry, {
     debug: app.get('env') === 'development',
-    // config for watchify 
-    cache: {}, 
+    // config for watchify
+    cache: {},
     packageCache: {},
-    basedir: __dirname 
+    basedir: __dirname
   })
   if (app.get('env') === 'development') {
     const bundlerEmitter = BundlerMiddleware.emitter(bundler)
@@ -53,6 +53,7 @@ module.exports = function (db) {
           res.setHeader('content-type', 'text/html')
           res.send(createIndexHtml({
             script: bundleUrl,
+            head: `<style id="app-styles"></style>`,
             body: `<div id='app'></div>`
           }))
           return
@@ -78,7 +79,7 @@ module.exports = function (db) {
       }
     })
   }
-   
+
 
   app.use(function (err, req, res, next) {
     if (err) console.error('error', err)
