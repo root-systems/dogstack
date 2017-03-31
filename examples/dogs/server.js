@@ -53,7 +53,10 @@ module.exports = function (db) {
           res.setHeader('content-type', 'text/html')
           res.send(createIndexHtml({
             script: bundleUrl,
-            head: `<style id="app-styles"></style>`,
+            head: `
+              <style id="app-styles"></style>
+              <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+            `,
             body: `<div id='app'></div>`
           }))
           return
