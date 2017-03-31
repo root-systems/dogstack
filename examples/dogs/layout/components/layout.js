@@ -1,7 +1,12 @@
-const React = require('react')
+import React from 'react'
+import { createComponent } from 'react-fela'
+
+import styles from '../styles/layout'
 
 export default function Layout (props) {
-  return <div>
+  const Container = createComponent(styles.container, 'div')
+
+  return <Container>
     { props.children }
-  </div>
+  </Container>
 }
