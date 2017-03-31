@@ -1,20 +1,30 @@
 import React from 'react'
+import { connect as connectFela } from 'react-fela'
 
 import Dog from './dog'
 
-export default class Dogs extends React.Component {
+import styles from '../styles/dogs'
+
+class Dogs extends React.Component {
   componentDidMount () {
     this.props.findDog()
   }
 
   render () {
-    return <div>
+    return <div className={this.props.styles.container}>
       <span>DOGS</span>
       {
         this.props.dogs.map((dog) => {
           return <Dog name={dog.name} />
         })
       }
+      <button>Adopt a dog!</button>
     </div>
   }
 }
+
+export default connectFela((props) => ({ renderRule }) => {
+  return {
+    container: renderRule(styles.container, props)
+  }
+})(Dogs)
