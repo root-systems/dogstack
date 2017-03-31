@@ -3,6 +3,7 @@ import { connect as connectFela } from 'react-fela'
 
 import Dog from './dog'
 
+import gcs from '../util/generate-component-styles'
 import styles from '../styles/dogs'
 
 class Dogs extends React.Component {
@@ -11,10 +12,12 @@ class Dogs extends React.Component {
   }
 
   render () {
-    return <div className={this.props.styles.container}>
+    const { styles, dogs } = this.props
+
+    return <div className={styles.container}>
       <span>DOGS</span>
       {
-        this.props.dogs.map((dog) => {
+        dogs.map((dog) => {
           return <Dog name={dog.name} />
         })
       }
@@ -23,8 +26,6 @@ class Dogs extends React.Component {
   }
 }
 
-export default connectFela((props) => ({ renderRule }) => {
-  return {
-    container: renderRule(styles.container, props)
-  }
-})(Dogs)
+export default connectFela(
+  gcs(styles)
+)(Dogs)
