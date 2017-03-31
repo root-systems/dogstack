@@ -4,10 +4,20 @@ export default {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      backgroundColor: color,
-      ':hover': {
-        color: 'yellow'
-      }
+      backgroundColor: color
+    }
+  },
+  dogsContainer: () => {
+    return {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      marginTop: '20px'
+    }
+  },
+  adoptButton: () => {
+    return {
+      marginTop: '20px'
     }
   }
 }

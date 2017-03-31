@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect as connectFela } from 'react-fela'
+import dogNames from 'dog-names'
 
 import Dog from './dog'
 
@@ -12,16 +13,21 @@ class Dogs extends React.Component {
   }
 
   render () {
-    const { styles, dogs } = this.props
+    const { styles, dogs, createDog } = this.props
 
     return <div className={styles.container}>
-      <span>DOGS</span>
-      {
-        dogs.map((dog) => {
-          return <Dog name={dog.name} />
-        })
-      }
-      <button>Adopt a dog!</button>
+      <span>MY DOGS</span>
+      <div className={styles.dogsContainer}>
+        {
+          dogs.map((dog, i) => {
+            return <Dog key={i} name={dog.name} />
+          })
+        }
+      </div>
+      <button
+        className={styles.adoptButton}
+        onClick={() => { createDog({ name: dogNames.allRandom() }) }}
+      >Adopt a dog!</button>
     </div>
   }
 }
