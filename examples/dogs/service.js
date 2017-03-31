@@ -1,7 +1,9 @@
 const feathers = require('feathers')
 const bodyParser = require('body-parser')
 const rest = require('feathers-rest')
-const _ = require('lodash')
+const hooks = require('feathers-hooks')
+const forEach = require('lodash/forEach')
+const keyBy = require('lodash/keyBy')
 
 const services = {
   dogs: require('./dogs/service.js')
@@ -13,9 +15,16 @@ module.exports = function (db) {
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
     app.configure(rest())
+    app.configure(hooks())
     // services
-    _.forEach(services, (service, name) => {
-      app.use('/api/' + name, service(db))
+    forEach(services, (service, name) => {
+      const serviceRoute = '/api/' + name
+      app.use(serviceRoute, service(db))
+      app.service(serviceRoute).after({
+        find (hook) {
+          hook.result = keyBy(hook.result, 'id')
+        }
+      })
     })
   }
 }
