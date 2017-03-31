@@ -21,8 +21,12 @@ module.exports = function (db) {
       const serviceRoute = '/api/' + name
       app.use(serviceRoute, service(db))
       app.service(serviceRoute).after({
-        find (hook) {
-          hook.result = keyBy(hook.result, 'id')
+        all (hook) {
+          if (hook.method === 'find') {
+            hook.result = keyBy(hook.result, 'id')
+          } else {
+            hook.result = { [hook.result.id]: hook.result }
+          }
         }
       })
     })
