@@ -1,5 +1,5 @@
-const { Router, Route, IndexRoute } = require('react-router')
-const React = require('react')
+import { Router, Route, IndexRoute } from 'react-router'
+import React from 'react'
 
 // Top Level Containers
 import Layout from './layout/components/layout'
