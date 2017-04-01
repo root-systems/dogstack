@@ -11,7 +11,7 @@ import Router from './router'
 
 document.addEventListener('DOMContentLoaded', () => {
   const history = syncHistoryWithStore(browserHistory, store)
-  const renderer = createRenderer()
+  const renderer = createRenderer(document.getElementById('app-fonts'))
   const mountNode = document.getElementById('app-styles')
 
   ReactDOM.render(

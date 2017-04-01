@@ -55,6 +55,7 @@ module.exports = function (db) {
             script: bundleUrl,
             head: `
               <style id="app-styles"></style>
+              <style id="app-fonts"></style>
               <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
             `,
             body: `<div id='app'></div>`
