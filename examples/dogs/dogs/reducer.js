@@ -1,15 +1,16 @@
 import {combineReducers} from 'redux'
 import assign from 'lodash/assign'
 import omit from 'lodash/omit'
+import keys from 'lodash/keys'
 
 const dogs = function (state = {}, action) {
   switch (action.type) {
     case 'CREATE_DOG_SUCCESS':
-      return assign({}, state, { [action.payload.id]: action.payload })
+      return assign({}, state, action.payload)
     case 'FIND_DOG_SUCCESS':
       return action.payload
     case 'REMOVE_DOG_SUCCESS':
-      return omit(state, action.payload.id)
+      return omit(state, keys(action.payload)[0])
     default:
       return state
   }
