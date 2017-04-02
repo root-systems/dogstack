@@ -84,12 +84,10 @@ module.exports = function (db) {
     })
   }
 
-
   app.use(function (err, req, res, next) {
     if (err) console.error('error', err)
     next(err)
   })
-
 
   // error handler
   app.use(errorHandler())
