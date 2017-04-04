@@ -3,10 +3,10 @@ const bodyParser = require('body-parser')
 const rest = require('feathers-rest')
 const hooks = require('feathers-hooks')
 const forEach = require('lodash/forEach')
-const keyBy = require('lodash/keyBy')
 
 const services = {
-  dogs: require('./dogs/service.js')
+  dogs: require('./dogs/service'),
+  account: require('./account/service')
 }
 
 module.exports = function (db) {
@@ -20,11 +20,12 @@ module.exports = function (db) {
     forEach(services, (service, name) => {
       const serviceRoute = '/api/' + name
       app.use(serviceRoute, service(db))
-      app.service(serviceRoute).after({
-        find (hook) {
-          hook.result = keyBy(hook.result, 'id')
-        }
-      })
+      app.service(serviceRoute).after(
+        service.after || {}
+      )
+      app.service(serviceRoute).before(
+        service.before || {}
+      )
     })
   }
 }
