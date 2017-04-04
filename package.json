@@ -3,12 +3,12 @@
   "version": "0.0.5",
   "description": "a popular-choice grab-bag framework for teams working on production web apps",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "iainkirkpatrick",
   "license": "ISC",
   "dependencies": {
+    "tcomb": "^3.2.20",
+    "tcomb-form": "^0.9.16"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

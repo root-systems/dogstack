@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import { connect as connectFela } from 'react-fela'
 import dogNames from 'dog-names'
 import map from 'lodash/map'
@@ -42,6 +43,8 @@ class Dogs extends React.Component {
       >
         Give a dog to a friend!
       </button>
+      <Link to="/signup">Sign Up</Link>
+      <Link to="/signin">Sign In</Link>
     </div>
   }
 }
