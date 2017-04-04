@@ -1,3 +1,4 @@
+var { join } = require('path')
 // Update with your config settings.
 
 module.exports = {
@@ -5,13 +6,13 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './db/dev.sqlite3'
+      filename: join(__dirname , 'dev.sqlite3')
     },
     migrations: {
-      directory: './db/migrations'
+      directory: join(__dirname, 'migrations')
     },
     seeds: {
-      directory: './db/seeds'
+      directory: join(__dirname, 'seeds')
     }
   },
 
