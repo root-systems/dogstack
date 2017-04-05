@@ -29,6 +29,7 @@
     "body-parser": "^1.17.1",
     "dog-names": "^1.0.2",
     "feathers": "^2.1.1",
+    "feathers-authentication": "^0.7.12",
     "feathers-errors": "^2.6.2",
     "feathers-hooks": "^1.8.1",
     "feathers-knex": "^2.6.3",

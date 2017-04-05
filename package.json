@@ -7,9 +7,6 @@
   "author": "iainkirkpatrick",
   "license": "ISC",
   "dependencies": {
-    "feathers-authentication": "^0.7.12",
-    "tcomb": "^3.2.20",
-    "tcomb-form": "^0.9.16"
   },
   "devDependencies": {}
 }

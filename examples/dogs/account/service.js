@@ -5,7 +5,7 @@ const auth = require('feathers-authentication').hooks
 module.exports = function (db) {
   return feathersKnex({
     Model: db,
-    name: 'account'
+    name: 'accounts'
   })
 }
 
