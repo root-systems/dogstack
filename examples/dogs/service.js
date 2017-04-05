@@ -4,26 +4,28 @@ const rest = require('feathers-rest')
 const hooks = require('feathers-hooks')
 const forEach = require('lodash/forEach')
 
-const authentication = require('./authentication/service')
+const configuration = require('feathers-configuration')
+const authentication = require('feathers-authentication')
+const local = require('feathers-authentication-local')
+const jwt = require('feathers-authentication-jwt')
 
 const services = {
   dogs: require('./dogs/service'),
-  accounts: require('./account/service')
+  accounts: require('./account/service'),
 }
-
 
 module.exports = function (db) {
   return function () {
     const app = this
 
+    app.configure(configuration())
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true }))
-    app.configure(rest())
+    app.configure(rest('/api'))
     app.configure(hooks())
-    app.configure(authentication)
     // services
     forEach(services, (service, name) => {
-      const serviceRoute = '/api/' + name
+      const serviceRoute = name
       app.use(serviceRoute, service(db))
       app.service(serviceRoute).after(
         service.after || {}
@@ -32,5 +34,10 @@ module.exports = function (db) {
         service.before || {}
       )
     })
+
+    app.configure(authentication(app.get('auth')))
+      .configure(jwt())
+      .configure(local())
+      .configure(require('./authentication/service'))
   }
 }
