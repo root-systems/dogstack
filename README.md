@@ -30,4 +30,4 @@
 
 ## documentation
 
-[dogstack.js.org](https://dogstack.gitbooks.io/docs/content/)
+[dogstack.js.org](https://dogstack.gitbooks.io/handbook/content/)
