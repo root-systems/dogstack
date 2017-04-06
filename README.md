@@ -20,21 +20,14 @@
 
 - provides generators for scaffolding apps made of popular libraries
 - abstracts away the app plumbing that you don't want to write again, and let's you focus on features
+- prescribes enough opinion to reduce friction for your team
+- is [omakase](https://www.youtube.com/watch?v=E99FnoYqoII), modules are hand-picked by expert chefs to deliver a consistent taste throughout
+- gives prescriptive opinions for how to structure production-scale apps, to reduce friction for your team
 
-## demos
+## examples
 
-- [dogstack.herokuapp.com](https://dogstack.herokuapp.com/): this repo's [./example](example) deployed to heroku
+- [dogstack.herokuapp.com](https://dogstack.herokuapp.com/): [dogstack/example](https://github.com/dogstack/example) deployed to heroku
 
-## modules
+## documentation
 
-- React
-- Redux
-- React Router
-- Reselect
-
-## prior art
-
-- architecture by [@ahdinosaur](https://github.com/ahdinosaur) on previous private projects
-- https://github.com/jlongster/react-redux-universal-hot-example0
-- https://github.com/react-boilerplate/react-boilerplate
-- general discussions with teammates
+[dogstack.js.org](https://dogstack.gitbooks.io/handbook/content/)
