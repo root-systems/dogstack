@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "secret": "CHANGE-ME",
+    "local": {
+      "service": "accounts",
+      "entity": "account"
+    }
+  }
+}

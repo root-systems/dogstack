@@ -5,9 +5,11 @@ import { routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
 import rootReducer from './reducer'
+import client from './client'
+
 
 const middleware = [
-  thunk,
+  thunk.withExtraArgument(client),
   routerMiddleware(browserHistory)
 ]
 if (process.env.NODE_ENV === 'development') {
