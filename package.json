@@ -2,15 +2,9 @@
   "name": "dogstack",
   "version": "0.0.5",
   "description": "a popular-choice grab-bag framework for teams working on production web apps",
-  "scripts": {
-    "start": "gitbook serve",
-    "start:dev": "gitbook --debug serve",
-    "build": "gitbook build"
-  },
+  "scripts": {},
   "author": "Root Systems",
   "license": "ISC",
-  "dependencies": {
-    "gitbook-cli": "^2.3.0"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }
