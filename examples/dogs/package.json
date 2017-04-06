@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
-    "dev": "DEBUG=dogs node-dev ./index.js"
+    "dev": "DEBUG=dogs node-dev ./index.js",
+    "migrate:latest": "NODE_ENV=development knex migrate:latest --knexfile db/knexfile.js",
+    "migrate:rollback": "NODE_ENV=development knex migrate:rollback --knexfile db/knexfile.js",
+    "seed": "NODE_ENV=development knex seed:run --knexfile db/knexfile.js"
   },
   "author": "iainkirkpatrick",
   "license": "ISC",
