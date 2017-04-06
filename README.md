@@ -24,9 +24,9 @@
 - is [omakase](https://www.youtube.com/watch?v=E99FnoYqoII), modules are hand-picked by expert chefs to deliver a consistent taste throughout
 - gives prescriptive opinions for how to structure production-scale apps, to reduce friction for your team
 
-## demos
+## examples
 
-- [dogstack.herokuapp.com](https://dogstack.herokuapp.com/): this repo's [./example](example) deployed to heroku
+- [dogstack.herokuapp.com](https://dogstack.herokuapp.com/): [dogstack/example](https://github.com/dogstack/example) deployed to heroku
 
 ## modules
 
