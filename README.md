@@ -9,7 +9,7 @@
 </h1>
 
 <h4 align="center">
-  :dog: :dog: :dog: popular-choice grab-bag framework for teams working on production web apps
+  :dog: :dog: :dog: a popular-choice grab-bag framework for teams working on production web apps
 </h4>
 
 <h6 align="center">
