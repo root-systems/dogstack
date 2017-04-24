@@ -2,6 +2,7 @@
   "name": "dogstack",
   "version": "0.0.5",
   "description": "a popular-choice grab-bag framework for teams working on production web apps",
+  "bin": "cli.js",
   "scripts": {},
   "author": "Root Systems",
   "license": "ISC",
