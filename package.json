@@ -6,6 +6,8 @@
   "author": "Root Systems",
   "license": "ISC",
   "dependencies": {
+    "standard": "^10.0.2",
+    "standard-engine": "^7.0.0",
     "yargs": "^7.1.0"
   },
   "devDependencies": {}
