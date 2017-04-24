@@ -5,6 +5,8 @@
   "scripts": {},
   "author": "Root Systems",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "yargs": "^7.1.0"
+  },
   "devDependencies": {}
 }
