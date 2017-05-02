@@ -5,7 +5,7 @@ const { assign } = Object
 
 module.exports = {
   command: 'lint [files..]',
-  description: 'lint your files with standard style',
+  description: 'lint your files with https://standardjs.com',
   builder: {
     fix: {
       type: 'boolean',
