@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const Cli = require('yargs')
 
 const argv = Cli
