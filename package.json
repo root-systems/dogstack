@@ -1,6 +1,6 @@
 {
   "name": "dogstack",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "a popular-choice grab-bag framework for teams working on production web apps",
   "bin": {
     "dogstack": "cli.js",
