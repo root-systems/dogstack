@@ -31,3 +31,50 @@
 ## documentation
 
 [dogstack.js.org](https://dogstack.gitbooks.io/handbook/content/)
+
+## cli usage
+
+- [dev](#dev)
+- [server](#server)
+- [test](#test)
+- [lint](#lint)
+
+### dev server
+
+starts development server
+
+```shell
+dog dev server
+```
+
+### server
+
+starts production server
+
+```shell
+dog server
+```
+
+### test
+
+runs [`ava`](https://github.com/avajs/ava) tests
+
+can optionally take a [glob](https://www.npmjs.com/package/glob)
+
+```shell
+dog test -- './todos/**/*.test.js'
+```
+
+default glob is `./**/*.test.js` ignoring `node_modules`
+
+### lint
+
+checks for [standard style](http://standardjs.com)
+
+can optionally take a [glob](https://www.npmjs.com/package/glob)
+
+```shell
+dog lint -- './todos/**/*.js'
+```
+
+default glob is `./**/*.js` ignoring `node_modules`
