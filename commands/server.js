@@ -8,13 +8,17 @@ module.exports = {
   command: 'server [file]',
   description: 'start feathers http server',
   handler: argv => {
+    if (process.env.NODE_ENV === 'development') {
+      require('longjohn')
+    }
+
     const Log = require('../Log')
     const Db = require('../Db')
     const Server = require('../Server')
 
     const {
       cwd,
-      file = './server.js'
+      file = './services.js'
     } = argv
     const name = basename(cwd)
     const dbConfigPath = join(cwd, 'db/index.js')
@@ -25,10 +29,8 @@ module.exports = {
 
     const log = Log({ name })
 
-    const App = require(appPath)
-    const app = App({ db, log })
-
-    const server = Server({ log, app })
+    const services = require(appPath)
+    const server = Server({ db, log, services })
     const close = server()
   }
 }
