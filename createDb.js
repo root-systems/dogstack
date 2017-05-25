@@ -1,8 +1,8 @@
 const Knex = require('knex')
 
-module.exports = Db
+module.exports = createDb
 
-function Db (config) {
+function createDb (config) {
   const env = process.env.NODE_ENV || 'development'
   return Knex(config[env])
 }

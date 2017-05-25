@@ -12,9 +12,9 @@ module.exports = {
       require('longjohn')
     }
 
-    const Log = require('../Log')
-    const Db = require('../Db')
-    const Server = require('../Server')
+    const createLog = require('../createLog')
+    const createDb = require('../createDb')
+    const createServer = require('../createServer')
 
     const {
       cwd,
@@ -25,12 +25,12 @@ module.exports = {
     const appPath = join(cwd, file)
 
     const dbConfig = require(dbConfigPath)
-    const db = Db(dbConfig)
+    const db = createDb(dbConfig)
 
-    const log = Log({ name })
+    const log = createLog({ name })
 
     const services = require(appPath)
-    const server = Server({ db, log, services })
+    const server = createServer({ db, log, services })
     const close = server()
   }
 }

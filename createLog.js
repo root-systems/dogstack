@@ -1,9 +1,9 @@
 const Pino = require('pino')
 const prettyPino = require('pino-colada')
 
-module.exports = Log
+module.exports = createLog
 
-function Log (options = {}) {
+function createLog (options = {}) {
   const {
     name,
     level = process.env.LEVEL || 'info',

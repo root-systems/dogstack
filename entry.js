@@ -1,0 +1,51 @@
+const React = require('react')
+const ReactDOM = require('react-dom')
+const { Provider: ReduxProvider } = require('react-redux')
+const { Provider: FelaProvider } = require('@ahdinosaur/react-fela')
+const { ConnectedRouter } = require('react-router-redux')
+const createBrowserHistory = require('history/createBrowserHistory').default
+const h = require('react-hyperscript')
+const merge = require('ramda/src/merge')
+
+const Root = require('dogstack/Root')
+const createStore = require('dogstack/createStore')
+const createStyleRenderer = require('dogstack/createStyleRenderer')
+const createClient = require('dogstack/createClient')
+
+const storeOptions = getDefaultExport(require('./store'))
+const styleRendererOptions = getDefaultExport(require('./styleRenderer'))
+const clientOptions = getDefaultExport(require('./client'))
+const rootOptions = getDefaultExport(require('./root'))
+const routes = getDefaultExport(require('./routes'))
+const Layout = getDefaultExport(require('./layout'))
+
+document.addEventListener('DOMContentLoaded', () => {
+  const history = createBrowserHistory()
+  const client = createClient(clientOptions)
+
+  const store = createStore(
+    merge(
+      { history, client },
+      storeOptions
+    )
+  )
+  const styleRenderer = createStyleRenderer(styleRendererOptions)
+
+  const styleNode = document.querySelector(rootOptions.styleNode)
+  const appNode = document.querySelector(rootOptions.appNode)
+
+  ReactDOM.render(
+    h(Root, {
+      history,
+      store,
+      styleRenderer,
+      styleNode
+    }, [
+      h(Layout, { routes })
+    ]),
+    appNode
+  )
+})
+
+// interop when using babel
+function getDefaultExport (obj) { return obj && obj.__esModule ? obj.default : obj }
