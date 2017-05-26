@@ -12,6 +12,7 @@ function createClient (options) {
   const {
     services = []
   } = options
+
   const localStorage = window ? window.localStorage : null
 
   const socket = io()
