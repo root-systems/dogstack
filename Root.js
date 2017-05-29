@@ -1,7 +1,8 @@
 const h = require('react-hyperscript')
 const { Provider: ReduxProvider } = require('react-redux')
-const { Provider: FelaProvider } = require('@ahdinosaur/react-fela')
 const { ConnectedRouter } = require('react-router-redux')
+
+const { StyleProvider } = require('./createStyle')
 
 module.exports = Root
 
@@ -11,13 +12,15 @@ function Root (props) {
     store,
     styleRenderer,
     styleNode,
+    styleTheme,
     children
   } = props
 
   return h(ReduxProvider, { store },
-    h(FelaProvider, {
+    h(StyleProvider, {
       renderer: styleRenderer,
-      mountNode: styleNode
+      mountNode: styleNode,
+      theme: styleTheme
     }, h(ConnectedRouter, {
         history
       }, children)

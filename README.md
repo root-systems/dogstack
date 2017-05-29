@@ -32,6 +32,53 @@
 
 [dogstack.js.org](https://dogstack.gitbooks.io/handbook/content/)
 
+## cli usage
+
+- [dev](#dev)
+- [server](#server)
+- [test](#test)
+- [lint](#lint)
+
+### dev server
+
+starts development server
+
+```shell
+dog dev server
+```
+
+### server
+
+starts production server
+
+```shell
+dog server
+```
+
+### test
+
+runs [`ava`](https://github.com/avajs/ava) tests
+
+can optionally take a [glob](https://www.npmjs.com/package/glob)
+
+```shell
+dog test -- './todos/**/*.test.js'
+```
+
+default glob is `./**/*.test.js` ignoring `node_modules`
+
+### lint
+
+checks for [standard style](http://standardjs.com)
+
+can optionally take a [glob](https://www.npmjs.com/package/glob)
+
+```shell
+dog lint -- './todos/**/*.js'
+```
+
+default glob is `./**/*.js` ignoring `node_modules`
+
 ## api usage
 
 ### `server.js`
@@ -100,14 +147,18 @@ export default {
 }
 ```
 
-### `styleRenderer.js`
+### `style.js`
 
 export configuration for [`fela`](https://github.com/rofrischmann/fela)
 
 ```js
-// styleRenderer.js
+// style.js
 export default {
   fontNode: '#app-fonts',
+  theme: {
+    colorPrimary: 'green',
+    colorSecondary: 'blue'
+  },
   setup: (renderer) => {
     renderer.renderStatic(
       { fontFamily: 'Lato' },
@@ -158,50 +209,3 @@ TODO this is not yet standardized, at the moment depends on your Layout.
 export layout React component, which accepts `routes` as props
 
 TODO this is not yet standardized
-
-## cli usage
-
-- [dev](#dev)
-- [server](#server)
-- [test](#test)
-- [lint](#lint)
-
-### dev server
-
-starts development server
-
-```shell
-dog dev server
-```
-
-### server
-
-starts production server
-
-```shell
-dog server
-```
-
-### test
-
-runs [`ava`](https://github.com/avajs/ava) tests
-
-can optionally take a [glob](https://www.npmjs.com/package/glob)
-
-```shell
-dog test -- './todos/**/*.test.js'
-```
-
-default glob is `./**/*.test.js` ignoring `node_modules`
-
-### lint
-
-checks for [standard style](http://standardjs.com)
-
-can optionally take a [glob](https://www.npmjs.com/package/glob)
-
-```shell
-dog lint -- './todos/**/*.js'
-```
-
-default glob is `./**/*.js` ignoring `node_modules`

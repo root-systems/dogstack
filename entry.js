@@ -13,7 +13,7 @@ const createStyleRenderer = require('dogstack/createStyleRenderer')
 const createClient = require('dogstack/createClient')
 
 const storeOptions = getDefaultExport(require('./store'))
-const styleRendererOptions = getDefaultExport(require('./styleRenderer'))
+const styleOptions = getDefaultExport(require('./style'))
 const clientOptions = getDefaultExport(require('./client'))
 const rootOptions = getDefaultExport(require('./root'))
 const routes = getDefaultExport(require('./routes'))
@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
       storeOptions
     )
   )
-  const styleRenderer = createStyleRenderer(styleRendererOptions)
+  const styleTheme = styleOptions.theme
+  const styleRenderer = createStyleRenderer(styleOptions)
 
   const styleNode = document.querySelector(rootOptions.styleNode)
   const appNode = document.querySelector(rootOptions.appNode)
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       history,
       store,
       styleRenderer,
+      styleTheme,
       styleNode
     }, [
       h(Layout, { routes })

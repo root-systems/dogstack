@@ -1,4 +1,7 @@
+const PropTypes = require('prop-types')
 const { createRenderer } = require('@ahdinosaur/fela')
+const { Provider: FelaProvider, ThemeProvider: FelaThemeProvider } = require('@ahdinosaur/react-fela')
+const h = require('react-hyperscript')
 
 // TODO publish preset `fela-preset-dogstack`
 // plugins and enhancers from https://github.com/cloudflare/cf-ui/blob/master/packages/cf-style-provider/src/index.js#L40
@@ -14,14 +17,17 @@ const fontRenderer = require('fela-font-renderer')
 const monolithic = require('fela-monolithic')
 */
 
-module.exports = createStyleRenderer
+module.exports = {
+  createStyleRenderer,
+  StyleProvider
+}
 
 function createStyleRenderer (options) {
   const {
     fontNode: userFontNode,
     plugins: userPlugins = [],
     enhancers: userEnhancers = [],
-    setup,
+    setup = noop,
     dev = process.env.NODE_ENV === 'development',
     selectorPrefix
   } = options
@@ -53,3 +59,33 @@ function createStyleRenderer (options) {
 
   return renderer
 }
+
+function StyleProvider (options) {
+  const {
+    renderer,
+    mountNode,
+    theme,
+    children
+  } = options
+
+  return h(
+    FelaProvider,
+    {
+      renderer,
+      mountNode
+    },
+    h(FelaThemeProvider, { theme }, children)
+  )
+}
+
+StyleProvider.defaultProps = {
+  theme: {}
+}
+StyleProvider.propTypes = {
+  renderer: PropTypes.object,
+  mountNode: PropTypes.object,
+  theme: PropTypes.object,
+  children: PropTypes.node.isRequired
+}
+
+function noop () {}
