@@ -83,7 +83,10 @@ default glob is `./**/*.js` ignoring `node_modules`
 
 ### `server.js`
 
-export an array of functions that will be run with [`server.configure(service)`](https://docs.feathersjs.com/api/application.html#configurecallback)
+
+export configuration for the [`feathers`](http://feathersjs.com) server
+
+- `services`: an array of functions that will be run with [`server.configure(service)`](https://docs.feathersjs.com/api/application.html#configurecallback)
 
 example:
 
@@ -151,6 +154,10 @@ export default {
 
 export configuration for [`fela`](https://github.com/rofrischmann/fela)
 
+- `fontNode`: query selector string or dom node to render app fonts
+- `theme`: object passsed to `<FelaThemeProvider theme={theme} />`
+- `setup`: function of shape `(renderer) => {}`
+
 ```js
 // style.js
 export default {
@@ -173,8 +180,9 @@ export default {
 
 ### `client.js`
 
-export an array of functions that will be run with [`client.configure(plugin)`](https://docs.feathersjs.com/api/application.html#configurecallback) for the [Feathers client](https://docs.feathersjs.com/api/client.html)
+export configuration for [`feathers` client](https://docs.feathersjs.com/api/client.html)
 
+- `services`: export an array of functions that will be run with [`client.configure(plugin)`](https://docs.feathersjs.com/api/application.html#configurecallback)
 
 ```js
 // client.js
@@ -187,8 +195,8 @@ export default {
 
 export configuration for root React component
 
-- `appNode`: query selector string for dom node to render app content
-- `styleNode`: query selector string for dom node to render app styles
+- `appNode`: query selector string or dom node to render app content
+- `styleNode`: query selector string or dom node to render app styles
 
 ```js
 // root.js
