@@ -5,30 +5,30 @@ const { assign } = Object
 // https://github.com/avajs/ava/blob/master/lib/cli.js
 
 module.exports = {
-  command: 'server [file]',
+  command: 'server',
   description: 'start feathers http server',
   handler: argv => {
-    const Log = require('../Log')
-    const Db = require('../Db')
-    const Server = require('../Server')
+    if (process.env.NODE_ENV === 'development') {
+      require('longjohn')
+    }
 
-    const {
-      cwd,
-      file = './server.js'
-    } = argv
+    const createLog = require('../createLog')
+    const createDb = require('../createDb')
+    const createServer = require('../createServer')
+
+    const { cwd } = argv
     const name = basename(cwd)
     const dbConfigPath = join(cwd, 'db/index.js')
-    const appPath = join(cwd, file)
+    const appPath = join(cwd, 'server.js')
 
+    require('babel-register')
     const dbConfig = require(dbConfigPath)
-    const db = Db(dbConfig)
+    const db = createDb(dbConfig)
 
-    const log = Log({ name })
+    const log = createLog({ name })
 
-    const App = require(appPath)
-    const app = App({ db, log })
-
-    const server = Server({ log, app })
+    const serverOptions = require(appPath)
+    const server = createServer(assign({ db, log }, serverOptions))
     const close = server()
   }
 }

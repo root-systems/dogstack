@@ -78,3 +78,142 @@ dog lint -- './todos/**/*.js'
 ```
 
 default glob is `./**/*.js` ignoring `node_modules`
+
+## api usage
+
+### `server.js`
+
+
+export configuration for the [`feathers`](http://feathersjs.com) server
+
+- `services`: an array of functions that will be run with [`server.configure(service)`](https://docs.feathersjs.com/api/application.html#configurecallback)
+
+example:
+
+```js
+// server.js
+export default {
+  services: [
+    require('./agents/service')
+    require('./accounts/service'),
+    require('./authentication/service'),
+    require('./profiles/service'),
+    require('./relationships/service')
+  ]
+}
+```
+
+```js
+// agents/service.js
+import feathersKnex from 'feathers-knex'
+
+export default function () {
+  const app = this
+  const db = app.get('db')
+
+  const name = 'dogs'
+  const options = { Model: db, name }
+
+  app.use(name, feathersKnex(options))
+  app.service(name).hooks(hooks)
+}
+
+const hooks = {
+  before: {},
+  after: {},
+  error: {}
+}
+```
+
+### `store.js`
+
+export configuration for the [`redux`](http://redux.js.org/) store:
+
+- [`updater`](https://github.com/rvikmanis/redux-fp#updaters-vs-reducers): a function of shape `action => state => nextState`, combined from each topic using [`redux-fp.concat`](https://github.com/rvikmanis/redux-fp/blob/master/docs/API.md#concat)
+- [`epic`](https://redux-observable.js.org/): a function of shape `(action$, store, { feathers }) => nextAction$`, combined from each topic using [`combineEpics`](https://redux-observable.js.org/docs/api/combineEpics.html)
+- [`middlewares`](http://redux.js.org/docs/Glossary.html#middleware): an array of functions of shape `store => next => action`
+- [`enhancers`](http://redux.js.org/docs/Glossary.html#store-enhancer): an array of functions of shape `createStore => createEnhancedStore
+
+```js
+// store.js
+import updater from './updater'
+import epic from './epic'
+
+const middlewares = []
+const enhancers = []
+
+export default {
+  updater,
+  epic,
+  middlewares,
+  enhancers
+}
+```
+
+### `style.js`
+
+export configuration for [`fela`](https://github.com/rofrischmann/fela)
+
+- `fontNode`: query selector string or dom node to render app fonts
+- `theme`: object passsed to `<FelaThemeProvider theme={theme} />`
+- `setup`: function of shape `(renderer) => {}`
+
+```js
+// style.js
+export default {
+  fontNode: '#app-fonts',
+  theme: {
+    colorPrimary: 'green',
+    colorSecondary: 'blue'
+  },
+  setup: (renderer) => {
+    renderer.renderStatic(
+      { fontFamily: 'Lato' },
+      'html,body,#app'
+    )
+    renderer.renderFont('Lato', [
+      'https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff'
+    ])
+  }
+}
+```
+
+### `client.js`
+
+export configuration for [`feathers` client](https://docs.feathersjs.com/api/client.html)
+
+- `services`: export an array of functions that will be run with [`client.configure(plugin)`](https://docs.feathersjs.com/api/application.html#configurecallback)
+
+```js
+// client.js
+export default {
+  services: []
+}
+```
+
+### `root.js`
+
+export configuration for root React component
+
+- `appNode`: query selector string or dom node to render app content
+- `styleNode`: query selector string or dom node to render app styles
+
+```js
+// root.js
+export default {
+  appNode: '#app',
+  styleNode: '#app-styles',
+}
+```
+
+### `routes.js`
+
+export [React routes](https://github.com/ReactTraining/react-router)
+
+TODO this is not yet standardized, at the moment depends on your Layout.
+
+### `layout.js`
+
+export layout React component, which accepts `routes` as props
+
+TODO this is not yet standardized
