@@ -9,7 +9,7 @@ const merge = require('ramda/src/merge')
 
 const Root = require('dogstack/Root')
 const createStore = require('dogstack/createStore')
-const createStyleRenderer = require('dogstack/createStyleRenderer')
+const { createStyleRenderer } = require('dogstack/createStyle')
 const createClient = require('dogstack/createClient')
 
 const storeOptions = getDefaultExport(require('./store'))
