@@ -1,6 +1,6 @@
 {
   "name": "dogstack",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "a popular-choice grab-bag framework for teams working on production web apps",
   "main": "index.js",
   "browser": "browser.js",
