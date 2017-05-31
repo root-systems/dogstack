@@ -27,8 +27,11 @@ module.exports = {
 
     const log = createLog({ name })
 
-    const serverOptions = require(appPath)
+    const serverOptions = getDefaultExport(require(appPath))
     const server = createServer(assign({ db, log }, serverOptions))
     const close = server()
   }
 }
+
+// interop when using babel
+function getDefaultExport (obj) { return obj && obj.__esModule ? obj.default : obj }
