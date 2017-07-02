@@ -11,8 +11,8 @@ const favicon = require('serve-favicon')
 const errorHandler = require('feathers-errors/handler')
 const configuration = require('feathers-configuration')
 const hooks = require('feathers-hooks')
+const rest = require('feathers-rest')
 const socketio = require('feathers-socketio')
-const authentication = require('feathers-authentication')
 
 const createBundler = require('./createBundler')
 
@@ -48,6 +48,20 @@ function createServer (options) {
   assert(faviconConfig, 'must set `favicon` in config. example: "app/favicon.ico"')
   app.use(favicon(faviconConfig))
 
+  // feathers hooks
+  app.configure(hooks())
+
+  // transports
+  app.configure(rest())
+  app.configure(socketio({
+    wsEngine: 'uws'
+  }))
+
+  // services (plugins)
+  services.forEach(service => {
+    app.configure(service)
+  })
+
   // static files
   const assetsConfig = app.get('assets')
   assert(assetsConfig, 'must set `assets` in config. example: "assets"')
@@ -73,24 +87,6 @@ function createServer (options) {
     log
   }
   app.use(createBundler(merge(defaultBundlerConfig, bundlerConfig)))
-
-  // feathers hooks
-  app.configure(hooks())
-
-  // transports
-  app.configure(socketio({
-    wsEngine: 'uws'
-  }))
-
-  // authentication
-  const authConfig = app.get('auth')
-  assert(authConfig, 'must set `auth` in config.')
-  app.configure(authentication(authConfig))
-
-  // services (plugins)
-  services.forEach(service => {
-    app.configure(service)
-  })
 
   // log errors
   app.use(function (err, req, res, next) {
