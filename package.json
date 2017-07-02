@@ -50,8 +50,6 @@
     "compression": "^1.6.2",
     "es2040": "^1.2.5",
     "feathers": "^2.1.2",
-    "feathers-authentication": "^1.2.3",
-    "feathers-authentication-client": "^0.3.2",
     "feathers-configuration": "^0.4.1",
     "feathers-errors": "^2.8.0",
     "feathers-hooks": "^2.0.1",

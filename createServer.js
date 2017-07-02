@@ -13,7 +13,6 @@ const configuration = require('feathers-configuration')
 const hooks = require('feathers-hooks')
 const rest = require('feathers-rest')
 const socketio = require('feathers-socketio')
-const authentication = require('feathers-authentication')
 
 const createBundler = require('./createBundler')
 
@@ -57,11 +56,6 @@ function createServer (options) {
   app.configure(socketio({
     wsEngine: 'uws'
   }))
-
-  // authentication
-  const authConfig = app.get('authentication')
-  assert(authConfig, 'must set `authentication` in config.')
-  app.configure(authentication(authConfig))
 
   // services (plugins)
   services.forEach(service => {
