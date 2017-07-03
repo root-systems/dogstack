@@ -3,13 +3,13 @@ const { createStore: Store, applyMiddleware, compose } = require('redux')
 const { createEpicMiddleware, combineEpics } = require('redux-observable')
 const { ConnectedRouter, routerMiddleware } = require('react-router-redux')
 const { concat: concatUpdaters } = require('redux-fp')
-
 const { createLogger } = require('redux-logger')
 
 module.exports = createStore
 
 function createStore (options) {
   const {
+    state,
     updater,
     epic,
     middlewares = [],
@@ -29,7 +29,7 @@ function createStore (options) {
   )
 
   const reducer = updaterToReducer(updater)
-  const store = Store(reducer, enhancer)
+  const store = Store(reducer, state, enhancer)
 
   return store
 }
