@@ -7,6 +7,9 @@ const createBrowserHistory = require('history/createBrowserHistory').default
 const h = require('react-hyperscript')
 const merge = require('ramda/src/merge')
 
+const config = require('dogstack/config')
+window.config = config
+
 const Root = require('dogstack/Root')
 const createStore = require('dogstack/createStore')
 const { createStyleRenderer } = require('dogstack/createStyle')
@@ -20,15 +23,19 @@ const routes = getDefaultExport(require('./routes'))
 const Layout = getDefaultExport(require('./layout'))
 
 document.addEventListener('DOMContentLoaded', () => {
+  const state = { config }
   const history = createBrowserHistory()
   const client = createClient(clientOptions)
+  window.client = client
 
   const store = createStore(
     merge(
-      { history, client },
+      { state, history, client },
       storeOptions
     )
   )
+  window.store = store
+
   const styleTheme = styleOptions.theme
   const styleRenderer = createStyleRenderer(styleOptions)
 
