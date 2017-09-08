@@ -6,6 +6,10 @@ const { IntlProvider } = require('react-intl')
 const { StyleProvider } = require('./createStyle')
 const getLocaleMessages = require('./lib/getLocaleMessages')
 
+
+const injectTapEventPlugin = require('react-tap-event-plugin')
+injectTapEventPlugin()
+
 module.exports = Root
 
 function Root (props) {

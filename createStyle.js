@@ -1,15 +1,14 @@
+const getDefaultExport = require('./lib/getDefaultExport')
+
 const PropTypes = require('prop-types')
 const { createRenderer } = require('fela')
 const { Provider: FelaProvider, ThemeProvider: FelaThemeProvider } = require('react-fela')
 const h = require('react-hyperscript')
-const MuiThemeProvider = require('material-ui/styles/MuiThemeProvider')
-const getMuiTheme = require('material-ui/styles/getMuiTheme')
+const MuiThemeProvider = getDefaultExport(require('material-ui/styles/MuiThemeProvider'))
+const getMuiTheme = getDefaultExport(require('material-ui/styles/getMuiTheme'))
 
 // TODO publish preset `fela-preset-dogstack`
 // plugins and enhancers from https://github.com/cloudflare/cf-ui/blob/master/packages/cf-style-provider/src/index.js#L40
-
-
-const getDefaultExport = require('./lib/getDefaultExport')
 
 const fallbackValue = getDefaultExport(require('fela-plugin-fallback-value'))
 const lvha = getDefaultExport(require('fela-plugin-lvha'))
