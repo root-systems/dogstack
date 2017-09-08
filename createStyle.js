@@ -1,21 +1,22 @@
 const PropTypes = require('prop-types')
-const { createRenderer } = require('@ahdinosaur/fela')
-const { Provider: FelaProvider, ThemeProvider: FelaThemeProvider } = require('@ahdinosaur/react-fela')
+const { createRenderer } = require('fela')
+const { Provider: FelaProvider, ThemeProvider: FelaThemeProvider } = require('react-fela')
 const h = require('react-hyperscript')
+const MuiThemeProvider = require('material-ui/styles/MuiThemeProvider')
+const getMuiTheme = require('material-ui/styles/getMuiTheme')
 
 // TODO publish preset `fela-preset-dogstack`
 // plugins and enhancers from https://github.com/cloudflare/cf-ui/blob/master/packages/cf-style-provider/src/index.js#L40
 
-/*
-const prefixer = require('fela-plugin-prefixer')
-const fallbackValue = require('fela-plugin-fallback-value')
-const unit = require('fela-plugin-unit')
-const lvha = require('fela-plugin-lvha')
-const validator = require('fela-plugin-validator')
-const beautifier = require('fela-beautifier')
-const fontRenderer = require('fela-font-renderer')
-const monolithic = require('fela-monolithic')
-*/
+
+const getDefaultExport = require('./lib/getDefaultExport')
+
+const fallbackValue = getDefaultExport(require('fela-plugin-fallback-value'))
+const lvha = getDefaultExport(require('fela-plugin-lvha'))
+const validator = getDefaultExport(require('fela-plugin-validator'))
+const beautifier = getDefaultExport(require('fela-beautifier'))
+const monolithic = getDefaultExport(require('fela-monolithic'))
+const prefixer = getDefaultExport(require('fela-plugin-prefixer'))
 
 module.exports = {
   createStyleRenderer,
@@ -28,7 +29,8 @@ function createStyleRenderer (options) {
     plugins: userPlugins = [],
     enhancers: userEnhancers = [],
     setup = noop,
-    dev = process.env.NODE_ENV === 'development',
+    prod = process.env.NODE_ENV === 'production',
+    dev = !prod,
     selectorPrefix
   } = options
 
@@ -36,14 +38,17 @@ function createStyleRenderer (options) {
     ? document.querySelector(userFontNode)
     : userFontNode
 
-  var defaultPlugins = []//[prefixer(), fallbackValue(), unit(), lvha()]
-  var defaultEnhancers = []//[fontRenderer(fontNode)]
+  var defaultPlugins = [fallbackValue(), lvha()]
+  var defaultEnhancers = []
 
-  // if (dev) {
-  if (false && dev) {
+  if (dev) {
     defaultPlugins.push(validator())
     defaultEnhancers.push(beautifier())
     defaultEnhancers.push(monolithic())
+  }
+
+  if (prod) {
+    defaultPlugins.push(prefixer())
   }
 
   const plugins = [...defaultPlugins, ...userPlugins]
@@ -68,13 +73,21 @@ function StyleProvider (options) {
     children
   } = options
 
-  return h(
-    FelaProvider,
-    {
+  const muiTheme = themeToMuiTheme(theme)
+
+  return (
+    h(FelaProvider, {
       renderer,
       mountNode
-    },
-    h(FelaThemeProvider, { theme }, children)
+    }, [
+      h(FelaThemeProvider, {
+        theme
+      }, [
+        h(MuiThemeProvider, {
+          muiTheme
+        }, children)
+      ])
+    ])
   )
 }
 
@@ -89,3 +102,22 @@ StyleProvider.propTypes = {
 }
 
 function noop () {}
+
+function themeToMuiTheme (theme) {
+  return getMuiTheme({
+    fontFamily: theme.fontFamily,
+    palette: {
+      primary1Color: theme.colors.primary1,
+      primary2Color: theme.colors.primary2,
+      primary3Color: theme.colors.primary3,
+      accent1Color: theme.colors.accent1,
+      accent2Color: theme.colors.accent2,
+      accent3Color: theme.colors.accent3,
+      textColor: theme.colors.text,
+      alternateTextColor: theme.colors.alternateText,
+      canvasColor: theme.colors.canvas,
+      borderColor: theme.colors.border,
+      shadowColor: theme.colors.shadow
+    }
+  })
+}
