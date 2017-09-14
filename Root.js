@@ -1,8 +1,14 @@
 const h = require('react-hyperscript')
 const { Provider: ReduxProvider } = require('react-redux')
 const { ConnectedRouter } = require('react-router-redux')
+const { IntlProvider } = require('react-intl')
 
 const { StyleProvider } = require('./createStyle')
+const getLocaleMessages = require('./lib/getLocaleMessages')
+
+
+const injectTapEventPlugin = require('react-tap-event-plugin')
+injectTapEventPlugin()
 
 module.exports = Root
 
@@ -10,20 +16,34 @@ function Root (props) {
   const {
     history,
     store,
+    locale = navigator.language,
+    messagesByLocale,
     styleRenderer,
     styleNode,
     styleTheme,
     children
   } = props
 
-  return h(ReduxProvider, { store },
-    h(StyleProvider, {
-      renderer: styleRenderer,
-      mountNode: styleNode,
-      theme: styleTheme
-    }, h(ConnectedRouter, {
-        history
-      }, children)
-    )
+  const messages = getLocaleMessages(messagesByLocale, locale)
+
+  return (
+    h(ReduxProvider, {
+      store
+    }, [
+      h(StyleProvider, {
+        renderer: styleRenderer,
+        mountNode: styleNode,
+        theme: styleTheme
+      }, [
+        h(IntlProvider, {
+          locale,
+          messages
+        }, [
+          h(ConnectedRouter, {
+            history
+          }, children)
+        ])
+      ])
+    ])
   )
 }
