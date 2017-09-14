@@ -4,7 +4,7 @@ const h = require('react-hyperscript')
 const getDefaultExport = require('dogstack/lib/getDefaultExport')
 const createRoot = require('dogstack/createRoot')
 
-const config = require('./config')
+const config = require('dogstack/config')
 window.config = config
 
 const store = getDefaultExport(require('./store'))
