@@ -17,6 +17,7 @@ const Layout = getDefaultExport(require('./layout'))
 
 document.addEventListener('DOMContentLoaded', () => {
   const renderRoot = createRoot({
+    config,
     store,
     style,
     client,
