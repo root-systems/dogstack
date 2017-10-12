@@ -42,7 +42,8 @@ function createStyleRenderer (options) {
   }
 
   if (prod) {
-    defaultPlugins.push(prefixer())
+    // prefixer must be before fallbackValue
+    defaultPlugins.unshift(prefixer())
   }
 
   const plugins = [...defaultPlugins, ...userPlugins]
