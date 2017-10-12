@@ -24,7 +24,6 @@ module.exports = {
 
 function createStyleRenderer (options) {
   const {
-    fontNode: userFontNode,
     plugins: userPlugins = [],
     enhancers: userEnhancers = [],
     setup = noop,
@@ -32,10 +31,6 @@ function createStyleRenderer (options) {
     dev = !prod,
     selectorPrefix
   } = options
-
-  const fontNode = typeof userFontNode === 'string'
-    ? document.querySelector(userFontNode)
-    : userFontNode
 
   var defaultPlugins = [fallbackValue(), lvha()]
   var defaultEnhancers = []
@@ -47,7 +42,8 @@ function createStyleRenderer (options) {
   }
 
   if (prod) {
-    defaultPlugins.push(prefixer())
+    // prefixer must be before fallbackValue
+    defaultPlugins.unshift(prefixer())
   }
 
   const plugins = [...defaultPlugins, ...userPlugins]
