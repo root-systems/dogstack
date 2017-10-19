@@ -48,6 +48,7 @@
     "babel-register": "^6.24.1",
     "compression": "^1.6.2",
     "es2040": "^1.2.5",
+    "express-enforces-ssl": "^1.1.0",
     "feathers": "^2.2.0",
     "feathers-configuration": "^0.4.1",
     "feathers-errors": "^2.8.0",
