@@ -13,6 +13,7 @@ const configuration = require('feathers-configuration')
 const hooks = require('feathers-hooks')
 const rest = require('feathers-rest')
 const socketio = require('feathers-socketio')
+const forceSsl = require('express-enforces-ssl')
 
 const createBundler = require('./createBundler')
 
@@ -36,6 +37,11 @@ function createServer (options) {
 
   // log requests and responses
   app.use(httpLogger({ logger: log }))
+
+  if (app.get('env') === 'production') {
+     app.enable('trust proxy')
+     app.use(forceSsl())
+  }
 
   // gzip compression
   app.use(compress())
