@@ -32,18 +32,19 @@ function createStyleRenderer (options) {
     selectorPrefix
   } = options
 
-  var defaultPlugins = [fallbackValue(), lvha()]
+  // plugin order matters!
+  //   https://github.com/rofrischmann/fela/blob/master/docs/advanced/Plugins.md#order-matters
+
+  var defaultPlugins = []
   var defaultEnhancers = []
 
   if (dev) {
-    defaultPlugins.push(validator())
-    defaultEnhancers.push(beautifier())
-    defaultEnhancers.push(monolithic())
+    defaultPlugins = [lvha(), fallbackValue(), validator()]
+    defaultEnhancers = [beautifier(), monolithic()]
   }
 
   if (prod) {
-    // prefixer must be before fallbackValue
-    defaultPlugins.unshift(prefixer())
+    defaultPlugins = [lvha(), prefixer(), fallbackValue()]
   }
 
   const plugins = [...defaultPlugins, ...userPlugins]
