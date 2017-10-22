@@ -41,8 +41,6 @@ function createRoot (options) {
   const styleRenderer = createStyleRenderer(styleOptions)
   const { locale, messagesByLocale } = intlOptions
 
-  const styleNode = document.querySelector(rootOptions.styleNode)
-
   return (children) => {
     return h(Root, {
       history,
@@ -50,8 +48,7 @@ function createRoot (options) {
       locale,
       messagesByLocale,
       styleRenderer,
-      styleTheme,
-      styleNode
+      styleTheme
     }, children)
   }
 }
