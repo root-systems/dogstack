@@ -64,7 +64,6 @@ function createStyleRenderer (options) {
 function StyleProvider (options) {
   const {
     renderer,
-    mountNode,
     theme,
     children
   } = options
@@ -73,8 +72,7 @@ function StyleProvider (options) {
 
   return (
     h(FelaProvider, {
-      renderer,
-      mountNode
+      renderer
     }, [
       h(FelaThemeProvider, {
         theme
@@ -92,7 +90,6 @@ StyleProvider.defaultProps = {
 }
 StyleProvider.propTypes = {
   renderer: PropTypes.object,
-  mountNode: PropTypes.object,
   theme: PropTypes.object,
   children: PropTypes.node.isRequired
 }
