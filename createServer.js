@@ -71,7 +71,7 @@ function createServer (options) {
   // static files
   const assetsConfig = app.get('assets')
   assert(assetsConfig, 'must set `assets` in config. example: "assets"')
-  app.use('/', feathers.static(assetsConfig))
+  app.use('/', feathers.static(assetsConfig.root, assetsConfig))
 
   // javascript bundler
   const bundlerConfig = app.get('bundler')
