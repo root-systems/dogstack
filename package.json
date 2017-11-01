@@ -50,7 +50,7 @@
     "es2040": "^1.2.5",
     "express-enforces-ssl": "^1.1.0",
     "feathers": "^2.2.0",
-    "feathers-configuration": "^0.4.1",
+    "feathers-configuration": "^0.4.2",
     "feathers-errors": "^2.8.0",
     "feathers-hooks": "^2.0.1",
     "feathers-reactive": "^0.4.1",
