@@ -95,7 +95,7 @@
     "standard-engine": "^7.0.0",
     "static-module": "^1.3.2",
     "string-to-stream": "^1.1.0",
-    "uify-server": "^1.1.3",
+    "uify-server": "github:ahdinosaur/uify-server#nullify-the-array",
     "uws": "^0.14.5",
     "yargs": "^7.1.0"
   },
