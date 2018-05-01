@@ -5,8 +5,8 @@ const { assign } = Object
 // https://github.com/avajs/ava/blob/master/lib/cli.js
 
 module.exports = {
-  command: 'server',
-  description: 'start feathers http server',
+  command: 'api',
+  description: 'start api server',
   handler: argv => {
     if (process.env.NODE_ENV === 'development') {
       require('longjohn')
@@ -14,7 +14,7 @@ module.exports = {
 
     const createLog = require('../createLog')
     const createDb = require('../createDb')
-    const createServer = require('../createServer')
+    const createApiServer = require('../createApiServer')
 
     const { cwd } = argv
     const name = basename(cwd)

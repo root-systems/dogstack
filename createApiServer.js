@@ -15,7 +15,8 @@ const rest = require('feathers-rest')
 const socketio = require('feathers-socketio')
 const forceSsl = require('express-enforces-ssl')
 
-const createBundler = require('./createBundler')
+const normalizePort = require('./lib/normalizePort')
+const startServer = require('./lib/startServer')
 
 module.exports = createServer
 
@@ -49,11 +50,6 @@ function createServer (options) {
   // http security headers
   app.use(helmet())
 
-  // favicon
-  const faviconConfig = app.get('favicon')
-  assert(faviconConfig, 'must set `favicon` in config. example: "app/favicon.ico"')
-  app.use(favicon(faviconConfig))
-
   // feathers hooks
   app.configure(hooks())
 
@@ -67,32 +63,6 @@ function createServer (options) {
   services.forEach(service => {
     app.configure(service)
   })
-
-  // static files
-  const assetsConfig = app.get('assets')
-  assert(assetsConfig, 'must set `assets` in config. example: "assets"')
-  app.use('/', feathers.static(assetsConfig.root, assetsConfig))
-
-  // javascript bundler
-  const bundlerConfig = app.get('bundler')
-  const entryPath = join(__dirname, 'entry.js')
-  // use stream so relative paths are based on cwd
-  const entry = fs.createReadStream(entryPath)
-  const defaultBundlerConfig = {
-    cwd,
-    entry,
-    plugins: [
-      // expose entry as 'dogstack'
-      (bundler) => {
-        bundler.require(__dirname, { expose: 'dogstack' })
-      }
-    ],
-    debug: app.get('env') === 'development',
-    optimize: false, // (mw) for some reason this breaks in production
-    cache: app.get('env') === 'production',
-    log
-  }
-  app.use(createBundler(merge(defaultBundlerConfig, bundlerConfig)))
 
   // log errors
   app.use(function (err, req, res, next) {
