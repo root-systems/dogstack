@@ -5,7 +5,7 @@ const { join } = require('path')
 
 module.exports = {
   command: 'db <subcommand> [options]',
-  description: 'uses ava, see full cli usage at http://knexjs.org/#Migrations-CLI',
+  description: 'uses knex, see full cli usage at http://knexjs.org/#Migrations-CLI',
   builder: {},
   handler: argv => {
     // remove sub-command 'db' from args
