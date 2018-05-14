@@ -9,10 +9,13 @@ const compress = require('compression')
 const helmet = require('helmet')
 const favicon = require('serve-favicon')
 const forceSsl = require('express-enforces-ssl')
+const propOr = require('ramda/src/propOr')
 const Bundler = require('bankai/http')
 
 const normalizePort = require('./lib/normalizePort')
 const startServer = require('./lib/startServer')
+
+const getEntryFile = propOr('browser.js', 'entry')
 
 module.exports = createServer
 
@@ -51,16 +54,10 @@ function createServer (options) {
   }
 
   // javascript bundler
-  const entryPath = join(__dirname, 'entry.js')
+  const entryFile = getEntryFile(assetsConfig)
+  const entryPath = join(__dirname, entryFile)
   const bundlerHandler = Bundler(entryPath, {
-    dirname: cwd,
-    plugins: [
-      // expose entry as 'dogstack'
-      (bundler) => {
-        console.log('bundler!')
-        bundler.require(__dirname, { expose: 'dogstack' })
-      }
-    ]
+    dirname: cwd
   })
   const compiler = bundlerHandler.compiler
   app.use(bundlerHandler)
