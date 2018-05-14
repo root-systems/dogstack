@@ -53,9 +53,11 @@ function createServer (options) {
   // javascript bundler
   const entryPath = join(__dirname, 'entry.js')
   const bundlerHandler = Bundler(entryPath, {
+    dirname: cwd,
     plugins: [
       // expose entry as 'dogstack'
       (bundler) => {
+        console.log('bundler!')
         bundler.require(__dirname, { expose: 'dogstack' })
       }
     ]
