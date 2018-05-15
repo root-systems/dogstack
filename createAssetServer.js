@@ -55,7 +55,7 @@ function createServer (options) {
 
   // javascript bundler
   const entryFile = getEntryFile(assetsConfig)
-  const entryPath = join(__dirname, entryFile)
+  const entryPath = join(cwd, entryFile)
   const bundlerHandler = Bundler(entryPath, {
     dirname: cwd
   })
