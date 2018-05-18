@@ -1,9 +1,6 @@
 const { join, basename } = require('path')
 const { assign } = Object
 
-// reference:
-// https://github.com/avajs/ava/blob/master/lib/cli.js
-
 module.exports = {
   command: 'api',
   description: 'start api server',
@@ -28,7 +25,7 @@ module.exports = {
     const log = createLog({ name })
 
     const serverOptions = getDefaultExport(require(appPath))
-    const server = createServer(assign({ db, log }, serverOptions))
+    const server = createApiServer(assign({ db, log }, serverOptions))
     const close = server()
   }
 }

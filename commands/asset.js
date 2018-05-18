@@ -1,9 +1,6 @@
 const { basename } = require('path')
 const { assign } = Object
 
-// reference:
-// https://github.com/avajs/ava/blob/master/lib/cli.js
-
 module.exports = {
   command: 'asset',
   description: 'start asset server',
