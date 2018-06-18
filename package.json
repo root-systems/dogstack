@@ -46,6 +46,7 @@
     "bankai": "^9.12.0",
     "compression": "^1.6.2",
     "config": "^1.30.0",
+    "cors": "^2.8.4",
     "es2040": "^1.2.5",
     "express-enforces-ssl": "^1.1.0",
     "feathers": "^2.2.0",

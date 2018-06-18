@@ -8,6 +8,7 @@ const feathers = require('feathers')
 const httpLogger = require('pino-http')
 const compress = require('compression')
 const helmet = require('helmet')
+const cors = require('cors')
 const favicon = require('serve-favicon')
 const errorHandler = require('feathers-errors/handler')
 const configuration = require('feathers-configuration')
@@ -55,6 +56,12 @@ function createServer (options) {
 
   // http security headers
   app.use(helmet())
+
+  // cors requests
+  const assetConfig = app.get('asset')
+  app.use(cors({
+    origin: url.parse(assetConfig.url) // TODO: allow for whitelist to be passed
+  }))
 
   // feathers hooks
   app.configure(hooks())
