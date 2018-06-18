@@ -7,7 +7,7 @@ function createLog (options = {}) {
   const {
     name,
     level = process.env.LEVEL || 'info',
-    pretty = process.env.NODE_ENV === 'development',
+    pretty = process.env.NODE_ENV !== 'production',
   } = options
 
   var stream

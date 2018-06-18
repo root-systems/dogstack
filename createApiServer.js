@@ -28,7 +28,6 @@ function createServer (options) {
     db,
     services = []
   } = options
-  console.log('services', services)
 
   const app = feathers()
 

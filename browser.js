@@ -3,13 +3,11 @@ const h = require('react-hyperscript')
 
 const createRoot = require('./createRoot')
 
-const config = require('./config')
-window.config = config
-
 module.exports = createBrowserEntry
 
 function createBrowserEntry (options) {
   const {
+    config,
     store,
     style,
     client,

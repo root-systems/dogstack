@@ -5,13 +5,12 @@ const rx = require('feathers-reactive')
 const Rx = require('rxjs')
 const io = require('socket.io-client')
 
-const config = require('./config')
-
 module.exports = createClient
 
 function createClient (options) {
   const {
-    services = []
+    services = [],
+    config
   } = options
 
   const apiUrl = config.api.url
