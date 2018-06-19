@@ -10,10 +10,9 @@ module.exports = createClient
 function createClient (options) {
   const {
     services = [],
-    config
+    apiUrl
   } = options
 
-  const apiUrl = config.api.url
   const socket = io(apiUrl)
 
   const client = feathers()
