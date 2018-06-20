@@ -109,7 +109,30 @@ const hooks = {
 
 ### `browser.js`
 
-a function to generate your dogstack client app, which takes as an arg an object of the following properties:
+dogstack exports a function `createBrowserEntry` out of `browser.js` with which to generate your dogstack client app. a dogstack app should have a file which calls this function with the required arguments, and which has it's name passed to `entry` as part of the `asset` [config](#config).
+
+example:
+```js
+const createBrowserEntry = require('dogstack/browser')
+const Config = require('dogstack/config')
+const config = Config()()
+window.config = config
+
+// other imports of files needed for browser entry argument, as outlined in sections below
+
+createBrowserEntry({
+  config,
+  store,
+  style,
+  client,
+  root,
+  intl,
+  routes,
+  Layout
+})
+```
+
+explanations and examples of the parts that must be passed to `createBrowserEntry`:
 
 #### `config`
 a [feathers-configuration](https://github.com/feathersjs/configuration) compatible config object. Dogstack provides [`dogstack/config`](#configjs) as a wrapper around feathers-configuration to make this easy
@@ -186,7 +209,7 @@ export default {
   services: [
     authentication
   ],
-  apiUrl: config.api.url
+  config
 }
 ```
 
