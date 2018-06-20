@@ -270,3 +270,32 @@ your top-level rendered React component, which accepts `routes` as props
 
 example:
 - see the [dogstack-example Layout component](https://github.com/root-systems/dogstack-example/blob/master/app/components/Layout.js)
+
+### `transform.js`
+
+exported browserify transform to be plugged in to your app's `package.json`
+- can be configured to whitelist particular config key / values to be available to the browser
+
+example:
+```js
+// package.json
+...
+"browserify": {
+  "transform": [
+    // other transforms
+    [
+      "dogstack/transform",
+      {
+        "config": {
+          "keys": [
+            "api",
+            "asset",
+            "authentication"
+          ]
+        }
+      }
+    ]
+  ]
+}
+...
+```
