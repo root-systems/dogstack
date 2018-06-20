@@ -9,15 +9,8 @@ module.exports = {
       require('longjohn')
     }
 
-    const createLog = require('../createLog')
     const createAssetServer = require('../createAssetServer')
-
-    const { cwd } = argv
-    const name = basename(cwd)
-
-    const log = createLog({ name })
-
-    const server = createAssetServer({ log })
+    const server = createAssetServer({})
     const close = server()
   }
 }

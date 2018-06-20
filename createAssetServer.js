@@ -1,7 +1,7 @@
 const fs = require('fs')
 const url = require('url')
 const assert = require('assert')
-const { join } = require('path')
+const { join, basename } = require('path')
 const merge = require('ramda/src/merge')
 const feathers = require('feathers')
 const configuration = require('feathers-configuration')
@@ -13,6 +13,7 @@ const forceSsl = require('express-enforces-ssl')
 const propOr = require('ramda/src/propOr')
 const Bundler = require('bankai/http')
 
+const createLog = require('./createLog')
 const normalizePort = require('./lib/normalizePort')
 const startServer = require('./lib/startServer')
 
@@ -22,16 +23,17 @@ module.exports = createServer
 
 function createServer (options) {
   const {
-    cwd = process.cwd(),
-    log
+    cwd = process.cwd()
   } = options
 
   const app = feathers()
-
-  app.set('log', log)
-
   // load config from ./config
   app.configure(configuration())
+
+  const logConfig = app.get('log')
+  const log = createLog({ name: basename(cwd), level: logConfig.level })
+
+  app.set('log', log)
 
   const assetConfig = app.get('asset')
   assert(assetConfig, 'must set `asset` in config. example: "asset"')

@@ -6,7 +6,7 @@ module.exports = createLog
 function createLog (options = {}) {
   const {
     name,
-    level = process.env.LEVEL || 'info',
+    level = 'info',
     pretty = process.env.NODE_ENV !== 'production',
   } = options
 

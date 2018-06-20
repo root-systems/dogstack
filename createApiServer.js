@@ -1,7 +1,7 @@
 const fs = require('fs')
 const url = require('url')
 const assert = require('assert')
-const { join } = require('path')
+const { join, basename } = require('path')
 const merge = require('ramda/src/merge')
 const forEachObjIndexed = require('ramda/src/forEachObjIndexed')
 const feathers = require('feathers')
@@ -17,6 +17,7 @@ const rest = require('feathers-rest')
 const socketio = require('feathers-socketio')
 const forceSsl = require('express-enforces-ssl')
 
+const createLog = require('./createLog')
 const normalizePort = require('./lib/normalizePort')
 const startServer = require('./lib/startServer')
 
@@ -25,18 +26,19 @@ module.exports = createServer
 function createServer (options) {
   const {
     cwd = process.cwd(),
-    log,
     db,
     services = []
   } = options
 
   const app = feathers()
+  // load config from ./config
+  app.configure(configuration())
+
+  const logConfig = app.get('log')
+  const log = createLog({ name: basename(cwd), level: logConfig.level })
 
   app.set('log', log)
   app.set('db', db)
-
-  // load config from ./config
-  app.configure(configuration())
 
   const apiConfig = app.get('api')
   const apiUrl = url.parse(apiConfig.url)

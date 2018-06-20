@@ -9,12 +9,10 @@ module.exports = {
       require('longjohn')
     }
 
-    const createLog = require('../createLog')
     const createDb = require('../createDb')
     const createApiServer = require('../createApiServer')
 
     const { cwd } = argv
-    const name = basename(cwd)
     const dbConfigPath = join(cwd, 'db/index.js')
     const appPath = join(cwd, 'server.js')
 
@@ -22,10 +20,8 @@ module.exports = {
     const dbConfig = require(dbConfigPath)
     const db = createDb(dbConfig)
 
-    const log = createLog({ name })
-
     const serverOptions = getDefaultExport(require(appPath))
-    const server = createApiServer(assign({ db, log }, serverOptions))
+    const server = createApiServer(assign({ db }, serverOptions))
     const close = server()
   }
 }
