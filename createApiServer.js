@@ -10,9 +10,8 @@ const compress = require('compression')
 const helmet = require('helmet')
 const cors = require('cors')
 const favicon = require('serve-favicon')
-const errorHandler = require('@feathersjs/errors/handler')
 const configuration = require('@feathersjs/configuration')
-const rest = require('@feathersjs/express/rest')
+const express = require('@feathersjs/express')
 const socketio = require('@feathersjs/socketio')
 const forceSsl = require('express-enforces-ssl')
 
@@ -64,11 +63,8 @@ function createServer (options) {
     origin: url.parse(assetConfig.url) // TODO: allow for whitelist to be passed
   }))
 
-  // feathers hooks
-  app.configure(hooks())
-
   // transports
-  app.configure(rest())
+  app.configure(express.rest())
   app.configure(socketio({
     wsEngine: 'uws'
   }))
@@ -85,7 +81,7 @@ function createServer (options) {
   })
 
   // error handler
-  app.use(errorHandler())
+  app.use(express.errorHandler())
 
   return (cb) => {
     return startServer(app, cb)

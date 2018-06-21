@@ -5,6 +5,7 @@ const { join, basename } = require('path')
 const merge = require('ramda/src/merge')
 const feathers = require('@feathersjs/feathers')
 const configuration = require('@feathersjs/configuration')
+const express = require('@feathersjs/express')
 const httpLogger = require('pino-http')
 const compress = require('compression')
 const helmet = require('helmet')
@@ -57,7 +58,7 @@ function createServer (options) {
 
   // static files
   if (assetConfig.root) {
-    app.use('/', feathers.static(assetConfig.root, assetConfig))
+    app.use('/', express.static(assetConfig.root, assetConfig))
   }
 
   // javascript bundler

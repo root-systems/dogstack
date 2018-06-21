@@ -15,7 +15,6 @@ function createClient (options) {
 
   const client = feathers()
     .configure(socketio(socket))
-    .configure(hooks())
     .configure(reactive({ idField: 'id' }))
 
   services.map(service => {
