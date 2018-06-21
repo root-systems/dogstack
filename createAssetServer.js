@@ -6,7 +6,7 @@ const merge = require('ramda/src/merge')
 const feathers = require('@feathersjs/feathers')
 const configuration = require('@feathersjs/configuration')
 const express = require('@feathersjs/express')
-const httpLogger = require('pino-http')
+const httpLogger = require('express-pino-logger')
 const compress = require('compression')
 const helmet = require('helmet')
 const favicon = require('serve-favicon')
@@ -27,7 +27,7 @@ function createServer (options) {
     cwd = process.cwd()
   } = options
 
-  const app = feathers()
+  const app = express(feathers())
   // load config from ./config
   app.configure(configuration())
 

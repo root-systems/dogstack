@@ -28,7 +28,7 @@ function createServer (options) {
     services = []
   } = options
 
-  const app = feathers()
+  const app = express(feathers())
   // load config from ./config
   app.configure(configuration())
 
