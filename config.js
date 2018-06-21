@@ -1,1 +1,1 @@
-module.exports = require('feathers-configuration')()()
+module.exports = require('@feathersjs/configuration')()()
