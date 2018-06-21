@@ -9,10 +9,11 @@ module.exports = createClient
 
 function createClient (options) {
   const {
-    services = []
+    services = [],
+    config
   } = options
 
-  const socket = io()
+  const socket = io(config.api.url)
 
   const client = feathers()
     .configure(socketio(socket))

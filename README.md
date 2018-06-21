@@ -18,15 +18,14 @@
 
 ## features
 
-- provides generators for scaffolding apps made of popular libraries
 - abstracts away the app plumbing that you don't want to write again, and let's you focus on features
 - prescribes enough opinion to reduce friction for your team
 - is [omakase](https://www.youtube.com/watch?v=E99FnoYqoII), modules are hand-picked by expert chefs to deliver a consistent taste throughout
-- gives prescriptive opinions for how to structure production-scale apps, to reduce friction for your team
+- gives prescriptive opinions for how to structure production-scale apps
 
 ## examples
 
-- [dogstack.herokuapp.com](https://dogstack.herokuapp.com/): [dogstack/example](https://github.com/dogstack/example) deployed to heroku
+- [dogstack.netlify.com](https://dogstack.netlify.com/): [dogstack-example](https://github.com/root-systems/dogstack-example) deployed to netlify / heroku
 
 ## documentation
 
@@ -34,50 +33,33 @@
 
 ## cli usage
 
-- [dev](#dev)
-- [server](#server)
-- [test](#test)
-- [lint](#lint)
+- [api](#api)
+- [asset](#asset)
+- [db](#db)
 
-### dev server
+### api server
 
-starts development server
-
-```shell
-dog dev server
-```
-
-### server
-
-starts production server
+starts api server
 
 ```shell
-dog server
+dog api
 ```
 
-### test
+### asset server
 
-runs [`ava`](https://github.com/avajs/ava) tests
-
-can optionally take a [glob](https://www.npmjs.com/package/glob)
+starts asset server
 
 ```shell
-dog test -- './todos/**/*.test.js'
+dog asset
 ```
 
-default glob is `./**/*.test.js` ignoring `node_modules`
+### db
 
-### lint
-
-checks for [standard style](http://standardjs.com)
-
-can optionally take a [glob](https://www.npmjs.com/package/glob)
+Runs [`knex`](http://knexjs.org/#Migrations-CLI) command, with any arguments.
 
 ```shell
-dog lint -- './todos/**/*.js'
+dog db
 ```
-
-default glob is `./**/*.js` ignoring `node_modules`
 
 ## api usage
 
@@ -125,43 +107,82 @@ const hooks = {
 }
 ```
 
-### `store.js`
+### `browser.js`
 
-export configuration for the [`redux`](http://redux.js.org/) store:
+dogstack exports a function `createBrowserEntry` out of `browser.js` with which to generate your dogstack client app. a dogstack app should have a file which calls this function with the required arguments, and which has it's name passed to `entry` as part of the `asset` [config](#config).
 
+example:
+```js
+const createBrowserEntry = require('dogstack/browser')
+const Config = require('dogstack/config')
+const config = Config()()
+window.config = config
+
+// other imports of files needed for browser entry argument, as outlined in sections below
+
+createBrowserEntry({
+  config,
+  store,
+  style,
+  client,
+  root,
+  intl,
+  routes,
+  Layout
+})
+```
+
+explanations and examples of the parts that must be passed to `createBrowserEntry`:
+
+#### `config`
+a [feathers-configuration](https://github.com/feathersjs/configuration) compatible config object. Dogstack provides [`dogstack/config`](#configjs) as a wrapper around feathers-configuration to make this easy
+
+example:
+```js
+// config/default.js
+module.exports = {
+  favicon: 'app/favicon.ico',
+  app: {
+    name: 'Dogstack Example'
+  },
+  api: {
+    port: 3001,
+    url: 'http://localhost:3001/',
+  },
+  asset: {
+    port: 3000,
+    entry: 'browser.js',
+    root: 'app/assets',
+    url: 'http://localhost:3000/'
+}
+```
+
+#### `store`
+an object with `updater` and `epic` properties:
 - [`updater`](https://github.com/rvikmanis/redux-fp#updaters-vs-reducers): a function of shape `action => state => nextState`, combined from each topic using [`redux-fp.concat`](https://github.com/rvikmanis/redux-fp/blob/master/docs/API.md#concat)
 - [`epic`](https://redux-observable.js.org/): a function of shape `(action$, store, { feathers }) => nextAction$`, combined from each topic using [`combineEpics`](https://redux-observable.js.org/docs/api/combineEpics.html)
-- [`middlewares`](http://redux.js.org/docs/Glossary.html#middleware): an array of functions of shape `store => next => action`
-- [`enhancers`](http://redux.js.org/docs/Glossary.html#store-enhancer): an array of functions of shape `createStore => createEnhancedStore
 
+example:
 ```js
 // store.js
 import updater from './updater'
 import epic from './epic'
 
-const middlewares = []
-const enhancers = []
-
 export default {
   updater,
-  epic,
-  middlewares,
-  enhancers
+  epic
 }
 ```
 
-### `style.js`
-
-export configuration for [`fela`](https://github.com/rofrischmann/fela)
-
-- `fontNode`: query selector string or dom node to render app fonts
+#### `style`
+an object with `theme` and `setup` properties:
 - `theme`: object passsed to `<FelaThemeProvider theme={theme} />`
 - `setup`: function of shape `(renderer) => {}`
 
+example:
 ```js
 // style.js
 export default {
-  fontNode: '#app-fonts',
   theme: {
     colorPrimary: 'green',
     colorSecondary: 'blue'
@@ -178,26 +199,28 @@ export default {
 }
 ```
 
-### `client.js`
+#### `client`
+configuration for [`feathers` client](https://docs.feathersjs.com/api/client.html), as an object with `services` and `config` properties:
+- `services`: an array of functions that will be run with [`client.configure(plugin)`](https://docs.feathersjs.com/api/application.html#configurecallback)
+- `apiUrl`: the url of the api server for the client to connect to (normally this can be extracted from your `config`)
 
-export configuration for [`feathers` client](https://docs.feathersjs.com/api/client.html)
-
-- `services`: export an array of functions that will be run with [`client.configure(plugin)`](https://docs.feathersjs.com/api/application.html#configurecallback)
-
+example:
 ```js
 // client.js
 export default {
-  services: []
+  services: [
+    authentication
+  ],
+  config
 }
 ```
 
-### `root.js`
-
-export configuration for root React component
-
+#### `root`
+a configuration object for the root React component with `appNode` and `styleNode` properties:
 - `appNode`: query selector string or dom node to render app content
 - `styleNode`: query selector string or dom node to render app styles
 
+example:
 ```js
 // root.js
 export default {
@@ -206,14 +229,75 @@ export default {
 }
 ```
 
-### `routes.js`
+#### `routes`
+an array of [React routes](https://github.com/ReactTraining/react-router) to be rendered as props into your top-level `Layout` component
 
-export [React routes](https://github.com/ReactTraining/react-router)
+example:
+```js
+// routes.js
+export default [
+  {
+    name: 'home',
+    path: '/',
+    exact: true,
+    Component: Home,
+    selector: getIsNotAuthenticated,
+    navigation: {
+      title: 'app.home',
+      icon: 'fa fa-home'
+    }
+  },
+  {
+    name: 'dogs',
+    path: '/',
+    exact: true,
+    Component: UserIsAuthenticated(DogsContainer),
+    selector: getIsAuthenticated,
+    navigation: {
+      title: 'dogs.dogs',
+      selector: getIsAuthenticated,
+      icon: 'fa fa-paw'
+    }
+  },
+  {
+    name: 'dog',
+    path: '/d/:dogId',
+    Component: UserIsAuthenticated(DogContainer)
+  }
+]
+```
 
-TODO this is not yet standardized, at the moment depends on your Layout.
+#### `Layout`
+your top-level rendered React component, which accepts `routes` as props
 
-### `layout.js`
+example:
+- see the [dogstack-example Layout component](https://github.com/root-systems/dogstack-example/blob/master/app/components/Layout.js)
 
-export layout React component, which accepts `routes` as props
+### `transform.js`
 
-TODO this is not yet standardized
+exported browserify transform to be plugged in to your app's `package.json`
+- can be configured to whitelist particular config key / values to be available to the browser
+
+example:
+```js
+// package.json
+...
+"browserify": {
+  "transform": [
+    // other transforms
+    [
+      "dogstack/transform",
+      {
+        "config": {
+          "keys": [
+            "api",
+            "asset",
+            "authentication"
+          ]
+        }
+      }
+    ]
+  ]
+}
+...
+```

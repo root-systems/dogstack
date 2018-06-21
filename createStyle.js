@@ -4,8 +4,8 @@ const PropTypes = require('prop-types')
 const { createRenderer } = require('fela')
 const { Provider: FelaProvider, ThemeProvider: FelaThemeProvider } = require('react-fela')
 const h = require('react-hyperscript')
-const MuiThemeProvider = getDefaultExport(require('material-ui/styles/MuiThemeProvider'))
-const getMuiTheme = getDefaultExport(require('material-ui/styles/getMuiTheme'))
+const MuiThemeProvider = getDefaultExport(require('@material-ui/core/styles/MuiThemeProvider'))
+const createMuiTheme = getDefaultExport(require('@material-ui/core/styles/createMuiTheme'))
 
 // TODO publish preset `fela-preset-dogstack`
 // plugins and enhancers from https://github.com/cloudflare/cf-ui/blob/master/packages/cf-style-provider/src/index.js#L40
@@ -78,7 +78,7 @@ function StyleProvider (options) {
         theme
       }, [
         h(MuiThemeProvider, {
-          muiTheme
+          theme: muiTheme
         }, children)
       ])
     ])
@@ -97,7 +97,7 @@ StyleProvider.propTypes = {
 function noop () {}
 
 function themeToMuiTheme (theme) {
-  return getMuiTheme({
+  return createMuiTheme({
     fontFamily: theme.fontFamily,
     palette: {
       primary1Color: theme.colors.primary1,
