@@ -91,7 +91,7 @@
     "socket.io-client": "^2.0.1",
     "static-module": "^3.0.0",
     "string-to-stream": "^1.1.0",
-    "uws": "^10.148.1",
+    "uws": "10.148.1",
     "yargs": "^11.0.0"
   },
   "devDependencies": {
