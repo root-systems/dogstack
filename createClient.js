@@ -1,8 +1,6 @@
-const feathers = require('feathers/client')
-const socketio = require('feathers-socketio/client')
-const hooks = require('feathers-hooks')
-const rx = require('feathers-reactive')
-const Rx = require('rxjs')
+const feathers = require('@feathersjs/feathers')
+const socketio = require('@feathersjs/socketio-client')
+const reactive = require('feathers-reactive')
 const io = require('socket.io-client')
 
 module.exports = createClient
@@ -17,8 +15,7 @@ function createClient (options) {
 
   const client = feathers()
     .configure(socketio(socket))
-    .configure(hooks())
-    .configure(rx(Rx))
+    .configure(reactive({ idField: 'id' }))
 
   services.map(service => {
     client.configure(service)

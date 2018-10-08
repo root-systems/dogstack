@@ -3,9 +3,10 @@ const url = require('url')
 const assert = require('assert')
 const { join, basename } = require('path')
 const merge = require('ramda/src/merge')
-const feathers = require('feathers')
-const configuration = require('feathers-configuration')
-const httpLogger = require('pino-http')
+const feathers = require('@feathersjs/feathers')
+const configuration = require('@feathersjs/configuration')
+const express = require('@feathersjs/express')
+const httpLogger = require('express-pino-logger')
 const compress = require('compression')
 const helmet = require('helmet')
 const favicon = require('serve-favicon')
@@ -26,7 +27,7 @@ function createServer (options) {
     cwd = process.cwd()
   } = options
 
-  const app = feathers()
+  const app = express(feathers())
   // load config from ./config
   app.configure(configuration())
 
@@ -57,7 +58,7 @@ function createServer (options) {
 
   // static files
   if (assetConfig.root) {
-    app.use('/', feathers.static(assetConfig.root, assetConfig))
+    app.use('/', express.static(assetConfig.root, assetConfig))
   }
 
   // javascript bundler

@@ -20,9 +20,11 @@ function createStore (options) {
     client
   } = options
 
+  const epicMiddleware = createEpicMiddleware({ dependencies: { feathers: client } })
+
   const enhancer = composeWithDevTools(
     applyMiddleware(...[
-      createEpicMiddleware(epic, { dependencies: { feathers: client } }),
+      epicMiddleware,
       routerMiddleware(history),
       ...middlewares,
       createLogger()
@@ -40,6 +42,8 @@ function createStore (options) {
   )
   const reducer = updaterToReducer(updater)
   const store = Store(reducer, state, enhancer)
+
+  epicMiddleware.run(epic)
 
   return store
 }

@@ -4,17 +4,15 @@ const assert = require('assert')
 const { join, basename } = require('path')
 const merge = require('ramda/src/merge')
 const forEachObjIndexed = require('ramda/src/forEachObjIndexed')
-const feathers = require('feathers')
-const httpLogger = require('pino-http')
+const feathers = require('@feathersjs/feathers')
+const httpLogger = require('express-pino-logger')
 const compress = require('compression')
 const helmet = require('helmet')
 const cors = require('cors')
 const favicon = require('serve-favicon')
-const errorHandler = require('feathers-errors/handler')
-const configuration = require('feathers-configuration')
-const hooks = require('feathers-hooks')
-const rest = require('feathers-rest')
-const socketio = require('feathers-socketio')
+const configuration = require('@feathersjs/configuration')
+const express = require('@feathersjs/express')
+const socketio = require('@feathersjs/socketio')
 const forceSsl = require('express-enforces-ssl')
 
 const createLog = require('./createLog')
@@ -30,7 +28,7 @@ function createServer (options) {
     services = []
   } = options
 
-  const app = feathers()
+  const app = express(feathers())
   // load config from ./config
   app.configure(configuration())
 
@@ -65,11 +63,8 @@ function createServer (options) {
     origin: url.parse(assetConfig.url) // TODO: allow for whitelist to be passed
   }))
 
-  // feathers hooks
-  app.configure(hooks())
-
   // transports
-  app.configure(rest())
+  app.configure(express.rest())
   app.configure(socketio({
     wsEngine: 'uws'
   }))
@@ -86,7 +81,7 @@ function createServer (options) {
   })
 
   // error handler
-  app.use(errorHandler())
+  app.use(express.errorHandler())
 
   return (cb) => {
     return startServer(app, cb)
